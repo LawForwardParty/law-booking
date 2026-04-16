@@ -460,9 +460,15 @@ function resetForm(){
 }
 
 async function cancelBooking(id){
-  // ✅ ตรวจสอบว่าอีเมลที่ค้นหาอยู่ใน booking นี้จริงๆ
   const searchEmail=document.getElementById('searchEmail').value.trim().toLowerCase();
-  const booking=allWeekBookings.find(b=>b.id===id);
+
+  // ✅ ถ้า allWeekBookings ว่าง ให้โหลดใหม่ก่อน
+  if(!allWeekBookings.length){
+    try{const res=await apiGet({action:'getBookings'});allWeekBookings=res.bookings||[];}
+    catch(e){toast('❌ โหลดข้อมูลไม่สำเร็จ','red');return;}
+  }
+
+  const booking=allWeekBookings.find(b=>b.id.toString()===id.toString());
   if(!booking){toast('❌ ไม่พบการจองนี้','red');return;}
   if(!booking.emails.map(e=>e.toLowerCase()).includes(searchEmail)){
     toast('❌ คุณไม่มีสิทธิ์ยกเลิกการจองของคนอื่น','red',4000);return;
@@ -470,11 +476,9 @@ async function cancelBooking(id){
   if(!confirm('ยืนยันยกเลิกการจอง?\n📍 '+booking.room+' · '+booking.date+' · '+booking.slot))return;
   try{
     await apiPost({action:'cancelBooking',id});
-    // ✅ อัปเดต cache ทันที
-    allWeekBookings=allWeekBookings.filter(b=>b.id!==id);
-    cache=cache.filter(b=>b.id!==id);
+    allWeekBookings=allWeekBookings.filter(b=>b.id.toString()!==id.toString());
+    cache=cache.filter(b=>b.id.toString()!==id.toString());
     toast('✅ ยกเลิกแล้ว','green');
-    // ✅ รีเฟรชทั้ง list และตารางว่าง
     await searchMyBookings();
     renderStatusForDate(statusViewDate||todayStr());
   }catch(e){toast('❌ ยกเลิกไม่สำเร็จ','red');}
@@ -485,15 +489,19 @@ async function searchMyBookings(){
   if(!validEmail(email)){toast('กรุณากรอกอีเมลให้ถูกต้อง','red');return;}
   document.getElementById('myBookingList').innerHTML='<div class="loading-state">⏳ กำลังค้นหา...</div>';
   try{
+    // ✅ โหลดข้อมูลใหม่ทุกครั้ง ไม่ filter ด้วย date เพื่อให้ได้ข้อมูลครบ
     const res=await apiGet({action:'getBookings'});
-    // ✅ อัปเดต allWeekBookings ด้วยเพื่อให้ตารางว่างซิงค์
     allWeekBookings=res.bookings||[];
     cache=allWeekBookings.filter(b=>b.date===selectedDate);
-    // ✅ รีเฟรชตารางว่างด้วยทุกครั้งที่ค้นหา
-    renderStatusForDate(statusViewDate||todayStr());
+
+    // ✅ อัปเดตตารางว่างด้วยทันที
+    if(statusViewDate) renderStatusForDate(statusViewDate);
 
     const mine=allWeekBookings.filter(b=>(b.emails||[]).map(e=>e.toLowerCase()).includes(email));
-    if(!mine.length){document.getElementById('myBookingList').innerHTML='<div class="empty-state">ไม่พบการจองสำหรับอีเมลนี้</div>';return;}
+    if(!mine.length){
+      document.getElementById('myBookingList').innerHTML='<div class="empty-state">ไม่พบการจองสำหรับอีเมลนี้</div>';
+      return;
+    }
     document.getElementById('myBookingList').innerHTML=mine.map(b=>{
       const done=isDone(b),n=(b.confirmedBy||[]).length;
       const badge=done?'<span class="status-badge badge-confirmed">✅ ยืนยันครบ</span>':'<span class="status-badge badge-pending">⏳ รอยืนยัน '+n+'/3</span>';
@@ -502,14 +510,26 @@ async function searchMyBookings(){
         :'<div style="padding:8px 12px;background:var(--orange-light);border-radius:8px;font-size:12px;color:var(--orange);font-weight:600;margin-bottom:12px;">⏳ รอยืนยัน '+n+'/3 คน</div>';
       const rows=(b.emails||[]).map((em,i)=>{
         const confirmed=(b.confirmedBy||[]).includes(i.toString())||(b.confirmedBy||[]).includes(i);
-        return '<div class="email-confirm-row '+(confirmed?'row-confirmed':'row-waiting')+'"><div class="ecr-dot '+(confirmed?'green':'orange')+'"></div><div class="ecr-info"><div class="ecr-email">'+em+'</div><div class="ecr-role">'+ROLES[i]+'</div></div><div class="ecr-status '+(confirmed?'s-confirmed':'s-waiting')+'">'+(confirmed?'✅ ยืนยันแล้ว':'📧 รอกดยืนยัน')+'</div></div>';
+        return '<div class="email-confirm-row '+(confirmed?'row-confirmed':'row-waiting')+
+          '"><div class="ecr-dot '+(confirmed?'green':'orange')+
+          '"></div><div class="ecr-info"><div class="ecr-email">'+em+
+          '</div><div class="ecr-role">'+ROLES[i]+
+          '</div></div><div class="ecr-status '+(confirmed?'s-confirmed':'s-waiting')+
+          '">'+(confirmed?'✅ ยืนยันแล้ว':'📧 รอกดยืนยัน')+'</div></div>';
       }).join('');
-      // ✅ แสดงปุ่มยกเลิกเฉพาะ booking ที่อีเมลนี้เป็นส่วนหนึ่ง
       const canCancel=(b.emails||[]).map(e=>e.toLowerCase()).includes(email);
-      const cancelBtn=canCancel?'<button class="cancel-btn" onclick="cancelBooking(\''+b.id+'\')">ยกเลิกการจอง</button>':'';
-      return '<div class="booking-card '+(done?'confirmed':'pending')+'"><div class="booking-card-header"><div><div class="booking-card-title">📍 '+b.room+'</div><div class="booking-card-detail">📅 '+b.date+' · ⏰ '+b.slot+' ('+b.durLabel+')</div></div>'+badge+'</div>'+statusBox+'<div class="email-confirm-list">'+rows+'</div><div class="card-actions">'+cancelBtn+'</div></div>';
+      const cancelBtn=canCancel
+        ?'<button class="cancel-btn" onclick="cancelBooking(\''+b.id+'\')">ยกเลิกการจอง</button>':'';
+      return '<div class="booking-card '+(done?'confirmed':'pending')+
+        '"><div class="booking-card-header"><div><div class="booking-card-title">📍 '+b.room+
+        '</div><div class="booking-card-detail">📅 '+b.date+' · ⏰ '+b.slot+' ('+b.durLabel+
+        ')</div></div>'+badge+'</div>'+statusBox+
+        '<div class="email-confirm-list">'+rows+'</div>'+
+        '<div class="card-actions">'+cancelBtn+'</div></div>';
     }).join('');
-  }catch(e){document.getElementById('myBookingList').innerHTML='<div class="empty-state">❌ โหลดไม่สำเร็จ</div>';}
+  }catch(e){
+    document.getElementById('myBookingList').innerHTML='<div class="empty-state">❌ โหลดไม่สำเร็จ</div>';
+  }
 }
 
 // สร้างวันทั้งอาทิตย์ตั้งแต่วันจันทร์-อาทิตย์ของสัปดาห์นี้
@@ -552,18 +572,19 @@ function buildWeekDayTabs(weekDates){
 let allWeekBookings=[];
 
 async function loadStatus(){
-  const rooms=['ห้องประชุม 1','ห้องประชุม 2','ห้องประชุม 3','ห้องประชุม 4','ห้องประชุม 5','ห้องประชุม 6'];
   document.getElementById('statusTable').innerHTML='<div class="loading-state">⏳ กำลังโหลด...</div>';
   const weekDates=getWeekDates();
   buildWeekDayTabs(weekDates);
   try{
-    // ดึงข้อมูลทั้งอาทิตย์ครั้งเดียว
+    // ✅ ดึงทั้งหมด ไม่ filter date เพื่อให้ครบทุกวัน
     const res=await apiGet({action:'getBookings'});
     allWeekBookings=res.bookings||[];
     cache=allWeekBookings.filter(b=>b.date===selectedDate);
     renderStatusForDate(statusViewDate||todayStr());
     onTimeChange();
-  }catch(e){document.getElementById('statusTable').innerHTML='<div class="empty-state">❌ โหลดไม่สำเร็จ</div>';}
+  }catch(e){
+    document.getElementById('statusTable').innerHTML='<div class="empty-state">❌ โหลดไม่สำเร็จ</div>';
+  }
 }
 
 function renderStatusForDate(dateStr){
