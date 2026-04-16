@@ -165,7 +165,8 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
   </div>
   <div class="divider"></div>
   <div class="section-title">4. กรอกอีเมลผู้จอง (3 คน)</div>
-  <p class="note" style="margin-bottom:14px;">ระบบจะส่งลิงก์ยืนยันไปยังอีเมลแต่ละคน · ต้องยืนยันครบ 3 คนภายใน 2 ชั่วโมง · <b style="color:#e74c3c;">ห้ามใช้อีเมลซ้ำกัน</b></p>
+  <p class="note" style="margin-bottom:6px;">ระบบจะส่งลิงก์ยืนยัน <b>ในวันที่จอง</b> ไปยังอีเมลแต่ละคน · ต้องยืนยันครบ 3 คนภายใน 2 ชั่วโมง · <b style="color:#e74c3c;">ห้ามใช้อีเมลซ้ำกัน</b></p>
+  <div id="emailSendNotice" style="display:none;background:#e8f4ff;border:1.5px solid #90cdf4;border-radius:8px;padding:10px 14px;font-size:13px;color:#1a5276;margin-bottom:14px;font-weight:600;">📅 อีเมลยืนยันจะถูกส่งในวันที่ <span id="emailSendDate">—</span></div>
   <div class="student-fields">
     <div class="student-block">
       <div class="student-label">👤 ผู้จองหลัก</div>
@@ -183,9 +184,10 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
   <div class="summary" id="summary" style="display:none;">
     <div class="summary-title">สรุปการจอง</div>
     <div class="summary-row"><span>พื้นที่</span><span id="sum-room">—</span></div>
-    <div class="summary-row"><span>วันที่</span><span id="sum-date">—</span></div>
+    <div class="summary-row"><span>วันที่จอง</span><span id="sum-date">—</span></div>
     <div class="summary-row"><span>เวลา</span><span id="sum-slot">—</span></div>
     <div class="summary-row"><span>ระยะเวลา</span><span id="sum-duration">—</span></div>
+    <div class="summary-row" style="background:#e8f4ff;border-radius:6px;padding:6px 8px;margin:4px 0;"><span style="color:#1a5276;font-weight:700;">📅 ส่งอีเมลวันที่</span><span id="sum-senddate" style="color:#1a5276;font-weight:700;">—</span></div>
     <div class="summary-row"><span>อีเมล 1</span><span id="sum-e1">—</span></div>
     <div class="summary-row"><span>อีเมล 2</span><span id="sum-e2">—</span></div>
     <div class="summary-row"><span>อีเมล 3</span><span id="sum-e3">—</span></div>
@@ -213,7 +215,9 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
 </div>
 
 <div id="tab-status" style="display:none;">
-  <div class="section-title">ตารางว่าง/ไม่ว่าง</div>
+  <div class="section-title">ตารางว่าง/ไม่ว่าง — อาทิตย์นี้</div>
+  <!-- Week day tabs -->
+  <div id="weekDayTabs" style="display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;"></div>
   <div id="statusTable"><div class="loading-state">⏳ กำลังโหลด...</div></div>
   <p class="note" style="margin-top:12px;">🟢 ว่าง &nbsp;·&nbsp; 🟡 รอยืนยัน &nbsp;·&nbsp; 🔴 จองแล้ว</p>
 </div>
@@ -350,6 +354,13 @@ function onEmailInput(n){
   updateSummary();updateSubmitBtn();
 }
 
+// คืนวันที่ปัจจุบันในรูปแบบ d/m/yyyy
+function todayStr(){
+  const d=new Date();return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+}
+// เปรียบเทียบว่าวันที่จองเป็นวันนี้หรือไม่
+function isToday(dateStr){return dateStr===todayStr();}
+
 function updateSummary(){
   const t=getTime(),dur=t.endMins-t.startMins,s=document.getElementById('summary');
   if(selectedRoom){
@@ -358,12 +369,25 @@ function updateSummary(){
     document.getElementById('sum-date').textContent=selectedDate||'—';
     if(dur>=30&&dur<=180){document.getElementById('sum-slot').textContent=minsToStr(t.startMins)+' – '+minsToStr(t.endMins);document.getElementById('sum-duration').textContent=durStr(dur);}
     else{document.getElementById('sum-slot').textContent='—';document.getElementById('sum-duration').textContent='—';}
+    // แสดงวันที่ส่งอีเมล
+    const sendDate=selectedDate||'—';
+    const isNow=isToday(selectedDate);
+    document.getElementById('sum-senddate').textContent=sendDate+(isNow?' (วันนี้)':' (วันที่จอง)');
+    // แสดง notice บนฟอร์ม
+    const notice=document.getElementById('emailSendNotice');
+    const noticeDate=document.getElementById('emailSendDate');
+    if(selectedDate){notice.style.display='block';noticeDate.textContent=sendDate+(isNow?' (วันนี้ ส่งทันที)':' — อีเมลจะถูกส่งในวันนั้น');}
+    else{notice.style.display='none';}
     [1,2,3].forEach(i=>document.getElementById('sum-e'+i).textContent=document.getElementById('email'+i).value.trim()||'—');
   }
 }
+
 function updateSubmitBtn(){
   const e=[1,2,3].map(i=>document.getElementById('email'+i).value.trim());
-  document.getElementById('submitBtn').disabled=!(selectedRoom&&timeValid()&&e.every(validEmail)&&!hasDups());
+  const isNow=isToday(selectedDate);
+  const btn=document.getElementById('submitBtn');
+  btn.textContent=isNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';
+  btn.disabled=!(selectedRoom&&timeValid()&&e.every(validEmail)&&!hasDups());
 }
 
 async function submitBooking(){
@@ -372,7 +396,8 @@ async function submitBooking(){
   const tokens=[mkToken(),mkToken(),mkToken()];
   const id=Date.now().toString();
   const base=window.location.origin+window.location.pathname;
-  const booking={id,emails,tokens,room:selectedRoom,date:selectedDate,slot,startMins:t.startMins,endMins:t.endMins,durLabel:durStr(dur),confirmedBy:[]};
+  const sendNow=isToday(selectedDate);
+  const booking={id,emails,tokens,room:selectedRoom,date:selectedDate,slot,startMins:t.startMins,endMins:t.endMins,durLabel:durStr(dur),confirmedBy:[],emailScheduled:!sendNow};
   const btn=document.getElementById('submitBtn');
   btn.disabled=true;btn.classList.add('loading');btn.textContent='💾 กำลังบันทึก...';
   try{
@@ -380,25 +405,48 @@ async function submitBooking(){
     cache.push(booking);
   }catch(e){
     toast('❌ บันทึกไม่สำเร็จ ลองใหม่','red',4000);
-    btn.disabled=false;btn.classList.remove('loading');btn.textContent='ส่งคำขอจอง + ส่งอีเมลยืนยัน →';return;
+    btn.disabled=false;btn.classList.remove('loading');
+    btn.textContent=sendNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';
+    return;
   }
-  btn.textContent='📧 กำลังส่งอีเมล...';
+
   let sent=0,sentFlags=[false,false,false];
-  for(let i=0;i<3;i++){
-    try{
-      await emailjs.send(EJS_SERVICE,EJS_TEMPLATE,{to_email:emails[i],student_role:ROLES[i],room:selectedRoom,date:selectedDate,slot,duration:durStr(dur),all_students:emails.join(', '),confirm_url:base+'?confirm='+tokens[i],from_name:'Law(รอ)จอง'});
-      sentFlags[i]=true;sent++;
-    }catch(e){console.error(e);}
+  if(sendNow){
+    // ส่งอีเมลทันทีถ้าเป็นวันนี้
+    btn.textContent='📧 กำลังส่งอีเมล...';
+    for(let i=0;i<3;i++){
+      try{
+        await emailjs.send(EJS_SERVICE,EJS_TEMPLATE,{to_email:emails[i],student_role:ROLES[i],room:selectedRoom,date:selectedDate,slot,duration:durStr(dur),all_students:emails.join(', '),confirm_url:base+'?confirm='+tokens[i],from_name:'Law(รอ)จอง'});
+        sentFlags[i]=true;sent++;
+      }catch(e){console.error(e);}
+    }
   }
-  btn.classList.remove('loading');btn.textContent='ส่งคำขอจอง + ส่งอีเมลยืนยัน →';
+
+  btn.classList.remove('loading');
+  btn.textContent=sendNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';
+
   document.getElementById('successLine1').textContent='📍 '+selectedRoom+' · 📅 '+selectedDate;
   document.getElementById('successLine2').textContent='⏰ '+slot+' ('+durStr(dur)+')';
-  document.getElementById('successEmails').innerHTML=emails.map((e,i)=>(sentFlags[i]?'✅ ':'❌ ')+e).join('<br>');
+
+  if(sendNow){
+    document.getElementById('successBox').querySelector('h3').textContent='ส่งอีเมลยืนยันแล้ว!';
+    document.getElementById('successBox').querySelector('.icon').textContent='📧';
+    document.getElementById('successEmails').innerHTML=emails.map((e,i)=>(sentFlags[i]?'✅ ':'❌ ')+e).join('<br>');
+    document.getElementById('successBox').querySelector('.success-note').innerHTML='📬 ส่งลิงก์ยืนยันไปที่<br><span style="font-weight:400;">'+emails.join('<br>')+'</span><br><br>⏰ ทั้ง 3 คนต้องกดยืนยันในอีเมลภายใน <b>2 ชั่วโมง</b>';
+    toast(sent===3?'✅ ส่งอีเมลครบ 3 คนแล้ว!':'⚠️ ส่งอีเมลได้ '+sent+'/3',sent===3?'green':'red');
+  } else {
+    document.getElementById('successBox').querySelector('h3').textContent='บันทึกการจองแล้ว!';
+    document.getElementById('successBox').querySelector('.icon').textContent='📅';
+    document.getElementById('successEmails').innerHTML=emails.join('<br>');
+    document.getElementById('successBox').querySelector('.success-note').innerHTML='📅 อีเมลยืนยันจะถูกส่งในวันที่ <b>'+selectedDate+'</b><br><br>📬 จะส่งไปที่<br><span style="font-weight:400;">'+emails.join('<br>')+'</span><br><br>⏰ เมื่อได้รับอีเมลแล้ว ต้องยืนยันครบ 3 คนภายใน <b>2 ชั่วโมง</b>';
+    toast('✅ บันทึกแล้ว! อีเมลจะส่งวันที่ '+selectedDate,'green');
+  }
+
   document.getElementById('successBox').style.display='block';
   document.getElementById('submitBtn').style.display='none';
   document.getElementById('summary').style.display='none';
+  document.getElementById('emailSendNotice').style.display='none';
   loadStatus();
-  toast(sent===3?'✅ บันทึกและส่งอีเมลครบ 3 คน!':'⚠️ บันทึกแล้ว ส่งอีเมลได้ '+sent+'/3',sent===3?'green':'red');
 }
 
 function resetForm(){
@@ -406,6 +454,8 @@ function resetForm(){
   [1,2,3].forEach(i=>{document.getElementById('email'+i).value='';document.getElementById('email'+i).className='';document.getElementById('hint'+i).textContent='';document.getElementById('dup'+i).style.display='none';});
   document.getElementById('successBox').style.display='none';document.getElementById('submitBtn').style.display='block';document.getElementById('submitBtn').disabled=true;
   document.getElementById('summary').style.display='none';
+  document.getElementById('emailSendNotice').style.display='none';
+  document.getElementById('submitBtn').textContent='ส่งคำขอจอง + ส่งอีเมลยืนยัน →';
   document.getElementById('startHour').value=9;document.getElementById('startMin').value=0;document.getElementById('endHour').value=10;document.getElementById('endMin').value=0;onTimeChange();
 }
 
@@ -438,27 +488,78 @@ async function searchMyBookings(){
   }catch(e){document.getElementById('myBookingList').innerHTML='<div class="empty-state">❌ โหลดไม่สำเร็จ</div>';}
 }
 
+// สร้างวันทั้งอาทิตย์ตั้งแต่วันจันทร์-อาทิตย์ของสัปดาห์นี้
+function getWeekDates(){
+  const today=new Date();
+  const day=today.getDay(); // 0=อา, 1=จ ...
+  const mon=new Date(today);
+  mon.setDate(today.getDate()-(day===0?6:day-1)); // เริ่มจากจันทร์
+  const days=['จ','อ','พ','พฤ','ศ','ส','อา'];
+  const result=[];
+  for(let i=0;i<7;i++){
+    const d=new Date(mon);d.setDate(mon.getDate()+i);
+    const ds=d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+    result.push({dateStr:ds,dayName:days[i],dayNum:d.getDate(),isToday:ds===todayStr()});
+  }
+  return result;
+}
+
+let statusViewDate=''; // วันที่กำลังดูอยู่ใน status tab
+
+function buildWeekDayTabs(weekDates){
+  const container=document.getElementById('weekDayTabs');
+  container.innerHTML='';
+  weekDates.forEach(d=>{
+    const btn=document.createElement('div');
+    btn.style.cssText='min-width:52px;padding:8px 6px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;flex-shrink:0;font-family:Sarabun,sans-serif;transition:all 0.2s;';
+    btn.innerHTML='<div style="font-size:10px;color:inherit;">'+(d.isToday?'<b>วันนี้</b>':d.dayName)+'</div><div style="font-size:17px;font-weight:700;">'+d.dayNum+'</div>';
+    if(d.isToday){btn.style.background='var(--red)';btn.style.borderColor='var(--red)';btn.style.color='white';}
+    btn.onclick=()=>{
+      container.querySelectorAll('div').forEach(b=>{b.style.background='white';b.style.borderColor='var(--border)';b.style.color='var(--text)';});
+      btn.style.background='var(--red)';btn.style.borderColor='var(--red)';btn.style.color='white';
+      statusViewDate=d.dateStr;
+      renderStatusForDate(d.dateStr);
+    };
+    if(d.isToday)statusViewDate=d.dateStr;
+    container.appendChild(btn);
+  });
+}
+
+let allWeekBookings=[];
+
 async function loadStatus(){
   const rooms=['ห้องประชุม 1','ห้องประชุม 2','ห้องประชุม 3','ห้องประชุม 4','ห้องประชุม 5','ห้องประชุม 6'];
-  const slots=[{l:'08:00–11:00',s:480,e:660},{l:'11:00–14:00',s:660,e:840},{l:'14:00–17:00',s:840,e:1020},{l:'17:00–20:00',s:1020,e:1200},{l:'20:00–23:00',s:1200,e:1380},{l:'23:00–02:00',s:1380,e:1560}];
   document.getElementById('statusTable').innerHTML='<div class="loading-state">⏳ กำลังโหลด...</div>';
+  const weekDates=getWeekDates();
+  buildWeekDayTabs(weekDates);
   try{
-    const res=await apiGet({action:'getBookings',date:selectedDate});
-    cache=res.bookings||[];
-    let html='';
-    rooms.forEach(room=>{
-      const rb=cache.filter(b=>b.room===room);
-      html+='<div style="margin-bottom:16px;"><div style="font-weight:700;font-size:13px;margin-bottom:8px;">'+room+'</div><div style="display:flex;flex-wrap:wrap;gap:6px;">';
-      slots.forEach(sl=>{
-        const hit=rb.find(b=>b.startMins<sl.e&&b.endMins>sl.s);
-        const[bg,color,icon]=!hit?['#e8f8f0','#27ae60','🟢']:isDone(hit)?['#ffeaea','#c0392b','🔴']:['#fffbf0','#e67e22','🟡'];
-        html+='<div style="padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;background:'+bg+';color:'+color+';">'+icon+' '+sl.l+'</div>';
-      });
-      html+='</div></div>';
-    });
-    document.getElementById('statusTable').innerHTML=html;
+    // ดึงข้อมูลทั้งอาทิตย์ครั้งเดียว
+    const res=await apiGet({action:'getBookings'});
+    allWeekBookings=res.bookings||[];
+    cache=allWeekBookings.filter(b=>b.date===selectedDate);
+    renderStatusForDate(statusViewDate||todayStr());
     onTimeChange();
   }catch(e){document.getElementById('statusTable').innerHTML='<div class="empty-state">❌ โหลดไม่สำเร็จ</div>';}
+}
+
+function renderStatusForDate(dateStr){
+  const rooms=['ห้องประชุม 1','ห้องประชุม 2','ห้องประชุม 3','ห้องประชุม 4','ห้องประชุม 5','ห้องประชุม 6'];
+  const slots=[{l:'08:00–11:00',s:480,e:660},{l:'11:00–14:00',s:660,e:840},{l:'14:00–17:00',s:840,e:1020},{l:'17:00–20:00',s:1020,e:1200},{l:'20:00–23:00',s:1200,e:1380},{l:'23:00–02:00',s:1380,e:1560}];
+  const dayBookings=allWeekBookings.filter(b=>b.date===dateStr);
+  let html='<div style="font-size:13px;color:var(--gray);margin-bottom:12px;font-weight:600;">📅 '+dateStr+'</div>';
+  rooms.forEach(room=>{
+    const rb=dayBookings.filter(b=>b.room===room);
+    html+='<div style="margin-bottom:14px;background:white;border-radius:10px;padding:12px;border:1.5px solid var(--border);">';
+    html+='<div style="font-weight:700;font-size:13px;margin-bottom:8px;color:#333;">'+room+'</div>';
+    html+='<div style="display:flex;flex-wrap:wrap;gap:6px;">';
+    slots.forEach(sl=>{
+      const hit=rb.find(b=>b.startMins<sl.e&&b.endMins>sl.s);
+      const[bg,color,icon]=!hit?['#e8f8f0','#27ae60','🟢']:isDone(hit)?['#ffeaea','#c0392b','🔴']:['#fffbf0','#e67e22','🟡'];
+      html+='<div style="padding:5px 10px;border-radius:6px;font-size:11px;font-weight:600;background:'+bg+';color:'+color+';">'+icon+' '+sl.l+'</div>';
+    });
+    html+='</div></div>';
+  });
+  document.getElementById('statusTable').innerHTML=html;
 }
 
 function showTab(tab){
