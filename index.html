@@ -246,7 +246,7 @@ function durStr(d){const h=Math.floor(d/60),m=d%60;return[(h?h+' ชั่วโ
 function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
 function isDone(b){return(b.confirmedBy||[]).length>=3;}
 function mkToken(){return Math.random().toString(36).slice(2)+Date.now().toString(36);}
-function hasConflict(r,d,s,e){return cache.some(b=>b.room===r&&b.date===d&&s<b.endMins&&e>b.startMins);}
+function hasConflict(r,d,s,e){return cache.some(b=>normalizeDate(b.date)===d&&b.room===r&&s<b.endMins&&e>b.startMins);}
 
 function toast(msg,type,ms){
   const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(type?' '+type:'');
@@ -492,7 +492,7 @@ async function searchMyBookings(){
     // ✅ โหลดข้อมูลใหม่ทุกครั้ง ไม่ filter ด้วย date เพื่อให้ได้ข้อมูลครบ
     const res=await apiGet({action:'getBookings'});
     allWeekBookings=res.bookings||[];
-    cache=allWeekBookings.filter(b=>b.date===selectedDate);
+    cache=allWeekBookings.filter(b=>normalizeDate(b.date)===selectedDate);
 
     // ✅ อัปเดตตารางว่างด้วยทันที
     if(statusViewDate) renderStatusForDate(statusViewDate);
@@ -520,9 +520,11 @@ async function searchMyBookings(){
       const canCancel=(b.emails||[]).map(e=>e.toLowerCase()).includes(email);
       const cancelBtn=canCancel
         ?'<button class="cancel-btn" onclick="cancelBooking(\''+b.id+'\')">ยกเลิกการจอง</button>':'';
+      // ✅ แสดง date ที่อ่านง่าย
+      const displayDate=normalizeDate(b.date);
       return '<div class="booking-card '+(done?'confirmed':'pending')+
         '"><div class="booking-card-header"><div><div class="booking-card-title">📍 '+b.room+
-        '</div><div class="booking-card-detail">📅 '+b.date+' · ⏰ '+b.slot+' ('+b.durLabel+
+        '</div><div class="booking-card-detail">📅 '+displayDate+' · ⏰ '+b.slot+' ('+b.durLabel+
         ')</div></div>'+badge+'</div>'+statusBox+
         '<div class="email-confirm-list">'+rows+'</div>'+
         '<div class="card-actions">'+cancelBtn+'</div></div>';
@@ -532,7 +534,17 @@ async function searchMyBookings(){
   }
 }
 
-// สร้างวันทั้งอาทิตย์ตั้งแต่วันจันทร์-อาทิตย์ของสัปดาห์นี้
+// ✅ แปลง date ให้เป็น d/m/yyyy ไม่ว่าจะมาในรูปแบบไหน
+function normalizeDate(dateStr){
+  if(!dateStr)return'';
+  // ถ้าเป็น ISO format เช่น 2026-04-17T00:00:00.000Z
+  if(dateStr.includes('T')||dateStr.includes('-')){
+    const d=new Date(dateStr);
+    return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
+  }
+  // ถ้าเป็น d/m/yyyy อยู่แล้ว
+  return dateStr;
+}
 function getWeekDates(){
   const today=new Date();
   const day=today.getDay(); // 0=อา, 1=จ ...
@@ -579,7 +591,7 @@ async function loadStatus(){
     // ✅ ดึงทั้งหมด ไม่ filter date เพื่อให้ครบทุกวัน
     const res=await apiGet({action:'getBookings'});
     allWeekBookings=res.bookings||[];
-    cache=allWeekBookings.filter(b=>b.date===selectedDate);
+    cache=allWeekBookings.filter(b=>normalizeDate(b.date)===selectedDate);
     renderStatusForDate(statusViewDate||todayStr());
     onTimeChange();
   }catch(e){
@@ -590,7 +602,8 @@ async function loadStatus(){
 function renderStatusForDate(dateStr){
   const rooms=['ห้องประชุม 1','ห้องประชุม 2','ห้องประชุม 3','ห้องประชุม 4','ห้องประชุม 5','ห้องประชุม 6'];
   const slots=[{l:'08:00–11:00',s:480,e:660},{l:'11:00–14:00',s:660,e:840},{l:'14:00–17:00',s:840,e:1020},{l:'17:00–20:00',s:1020,e:1200},{l:'20:00–23:00',s:1200,e:1380},{l:'23:00–02:00',s:1380,e:1560}];
-  const dayBookings=allWeekBookings.filter(b=>b.date===dateStr);
+  // ✅ normalize วันที่ทุก booking ก่อนเปรียบเทียบ
+  const dayBookings=allWeekBookings.filter(b=>normalizeDate(b.date)===dateStr);
   let html='<div style="font-size:13px;color:var(--gray);margin-bottom:12px;font-weight:600;">📅 '+dateStr+'</div>';
   rooms.forEach(room=>{
     const rb=dayBookings.filter(b=>b.room===room);
