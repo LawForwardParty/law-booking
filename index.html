@@ -166,7 +166,7 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
   </div>
   <div class="divider"></div>
   <div class="section-title">4. กรอกอีเมลผู้จอง (3 คน)</div>
-  <p class="note" style="margin-bottom:6px;">ระบบจะส่งลิงก์ยืนยัน <b>ในวันที่จอง</b> ไปยังอีเมลแต่ละคน · ต้องยืนยันครบ 3 คนภายใน 2 ชั่วโมง · <b style="color:#e74c3c;">ห้ามใช้อีเมลซ้ำกัน</b></p>
+  <p class="note" style="margin-bottom:6px;">ใช้ได้เฉพาะอีเมล <b>@dome.tu.ac.th</b> เท่านั้น · ต้องยืนยันครบ 3 คนภายใน 2 ชั่วโมง · <b style="color:#e74c3c;">ห้ามใช้อีเมลซ้ำกัน</b></p>
   <div id="emailSendNotice" style="display:none;background:#e8f4ff;border:1.5px solid #90cdf4;border-radius:8px;padding:10px 14px;font-size:13px;color:#1a5276;margin-bottom:14px;font-weight:600;">📅 อีเมลยืนยันจะถูกส่งในวันที่ <span id="emailSendDate">—</span></div>
   <div class="student-fields">
     <div class="student-block">
@@ -356,8 +356,13 @@ function onEmailInput(n){
   const v=document.getElementById('email'+n).value.trim();
   const h=document.getElementById('hint'+n),inp=document.getElementById('email'+n);
   if(!v){inp.className='';h.textContent='';h.style.color='';}
-  else if(validEmail(v)){inp.className='valid-email';h.textContent='✓ ถูกต้อง';h.style.color='var(--green)';}
-  else{inp.className='invalid-email';h.textContent='อีเมลไม่ถูกต้อง';h.style.color='#e74c3c';}
+  else if(!validEmail(v)){inp.className='invalid-email';h.textContent='อีเมลไม่ถูกต้อง';h.style.color='#e74c3c';}
+  else if(!v.toLowerCase().endsWith('@dome.tu.ac.th')){
+    inp.className='invalid-email';
+    h.textContent='⚠️ ใช้ได้เฉพาะอีเมล @dome.tu.ac.th เท่านั้น';
+    h.style.color='#e74c3c';
+  }
+  else{inp.className='valid-email';h.textContent='✓ ถูกต้อง';h.style.color='var(--green)';}
   const all=[1,2,3].map(i=>document.getElementById('email'+i).value.trim().toLowerCase());
   [1,2,3].forEach(i=>{
     const dup=document.getElementById('dup'+i),val=all[i-1];
@@ -397,12 +402,13 @@ function updateSummary(){
   }
 }
 
+function validTUEmail(e){return validEmail(e)&&e.toLowerCase().endsWith('@dome.tu.ac.th');}
 function updateSubmitBtn(){
   const e=[1,2,3].map(i=>document.getElementById('email'+i).value.trim());
   const isNow=isToday(selectedDate);
   const btn=document.getElementById('submitBtn');
   btn.textContent=isNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';
-  btn.disabled=!(selectedRoom&&timeValid()&&e.every(validEmail)&&!hasDups());
+  btn.disabled=!(selectedRoom&&timeValid()&&e.every(validTUEmail)&&!hasDups());
 }
 
 async function submitBooking(){
