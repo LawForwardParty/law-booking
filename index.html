@@ -582,7 +582,7 @@ function buildWeekDayTabs(weekDates){
   container.innerHTML='';
   weekDates.forEach(d=>{
     const btn=document.createElement('div');
-    btn.style.cssText='min-width:52px;padding:8px 6px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;flex-shrink:0;font-family:'Kanit',sans-serif;transition:all 0.2s;';
+    btn.style.cssText='min-width:52px;padding:8px 6px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;flex-shrink:0;font-family:Kanit,sans-serif;transition:all 0.2s;';
     btn.innerHTML='<div style="font-size:10px;color:inherit;">'+(d.isToday?'<b>วันนี้</b>':d.dayName)+'</div><div style="font-size:17px;font-weight:700;">'+d.dayNum+'</div>';
     if(d.isToday){btn.style.background='var(--red)';btn.style.borderColor='var(--red)';btn.style.color='white';}
     btn.onclick=()=>{
