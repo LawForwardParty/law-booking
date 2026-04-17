@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Law(รอ)จอง</title>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--red:#c0392b;--red-dark:#a93226;--red-light:#fff5f5;--red-border:#f5c6c6;--green:#27ae60;--green-light:#e8f8f0;--orange:#e67e22;--orange-light:#fef6ec;--orange-border:#fad7a0;--gray:#888;--border:#eee;--text:#111;}
-body{font-family:'Sarabun',sans-serif;background:#f9f9f9;color:var(--text);padding:20px;max-width:680px;margin:0 auto;}
+body{font-family:'Kanit',sans-serif;background:#f9f9f9;color:var(--text);padding:20px;max-width:680px;margin:0 auto;}
 h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
 .subtitle{font-size:13px;color:var(--gray);margin-bottom:20px;}
 .tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
@@ -25,7 +26,7 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
 .status-available{background:var(--green-light);color:var(--green);}
 .section-title{font-size:14px;font-weight:700;margin-bottom:10px;color:#333;}
 .date-row{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;}
-.date-btn{min-width:58px;padding:8px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;transition:all 0.2s;font-family:'Sarabun',sans-serif;flex-shrink:0;}
+.date-btn{min-width:58px;padding:8px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;transition:all 0.2s;font-family:'Kanit',sans-serif;flex-shrink:0;}
 .date-btn:hover{border-color:var(--red);}
 .date-btn.active{background:var(--red);border-color:var(--red);color:white;}
 .date-btn .day-name{font-size:11px;}
@@ -34,7 +35,7 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
 .time-picker-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
 .time-picker-row label{font-size:13px;font-weight:600;color:#444;min-width:60px;}
 .time-select-group{display:flex;align-items:center;gap:6px;}
-.time-select-group select{padding:8px 10px;border-radius:8px;border:2px solid var(--border);font-size:14px;font-family:'Sarabun',sans-serif;font-weight:600;background:white;cursor:pointer;outline:none;transition:border-color 0.2s;}
+.time-select-group select{padding:8px 10px;border-radius:8px;border:2px solid var(--border);font-size:14px;font-family:'Kanit',sans-serif;font-weight:600;background:white;cursor:pointer;outline:none;transition:border-color 0.2s;}
 .time-select-group select:focus{border-color:var(--red);}
 .time-select-group span{font-size:14px;font-weight:700;color:#555;}
 .time-duration-display{display:inline-block;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:600;background:var(--red-light);color:var(--red);border:1.5px solid var(--red-border);}
@@ -44,7 +45,7 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
 .conflict-warn{background:#fff3cd;border:1.5px solid #ffc107;border-radius:8px;padding:10px 14px;font-size:12px;color:#856404;margin-top:8px;display:none;}
 .form-group{margin-bottom:14px;}
 .form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#444;}
-.form-group input{width:100%;padding:10px 14px;border-radius:8px;border:2px solid var(--border);font-size:13px;font-family:'Sarabun',sans-serif;transition:border-color 0.2s;outline:none;}
+.form-group input{width:100%;padding:10px 14px;border-radius:8px;border:2px solid var(--border);font-size:13px;font-family:'Kanit',sans-serif;transition:border-color 0.2s;outline:none;}
 .form-group input:focus{border-color:var(--red);}
 .form-group input.valid-email{border-color:var(--green);background:#f6fff9;}
 .form-group input.invalid-email{border-color:#e74c3c;}
@@ -59,7 +60,7 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
 .summary-row{display:flex;justify-content:space-between;padding:3px 0;gap:10px;}
 .summary-row span:first-child{color:var(--gray);flex-shrink:0;}
 .summary-row span:last-child{font-weight:600;text-align:right;word-break:break-all;}
-.btn{width:100%;padding:12px;background:var(--red);color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Sarabun',sans-serif;}
+.btn{width:100%;padding:12px;background:var(--red);color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Kanit',sans-serif;}
 .btn:hover:not(:disabled){background:var(--red-dark);}
 .btn:disabled{background:#ddd;cursor:not-allowed;color:#aaa;}
 .btn.loading{background:#aaa;cursor:not-allowed;}
@@ -91,13 +92,13 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
 .ecr-status.s-confirmed{color:var(--green);}
 .ecr-status.s-waiting{color:var(--orange);}
 .card-actions{display:flex;gap:8px;flex-wrap:wrap;}
-.cancel-btn{background:none;border:2px solid #e74c3c;color:#e74c3c;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'Sarabun',sans-serif;}
+.cancel-btn{background:none;border:2px solid #e74c3c;color:#e74c3c;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'Kanit',sans-serif;}
 .cancel-btn:hover{background:#e74c3c;color:white;}
 .empty-state{text-align:center;padding:40px 20px;color:#bbb;font-size:14px;line-height:2;}
 .loading-state{text-align:center;padding:20px;color:var(--gray);font-size:13px;}
 .divider{height:1px;background:var(--border);margin:20px 0;}
 .note{font-size:12px;color:#999;line-height:1.6;}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:10px 20px;border-radius:8px;font-size:13px;font-family:'Sarabun',sans-serif;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;max-width:90vw;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:10px 20px;border-radius:8px;font-size:13px;font-family:'Kanit',sans-serif;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;max-width:90vw;}
 .toast.show{opacity:1;}
 .toast.green{background:var(--green);}
 .toast.red{background:var(--red);}
@@ -105,7 +106,7 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
 .confirm-page .big-icon{font-size:64px;margin-bottom:20px;}
 .confirm-page h2{font-size:24px;margin-bottom:10px;color:var(--red);}
 .confirm-page p{font-size:14px;color:#555;line-height:1.8;margin-bottom:8px;}
-.confirm-page .back-btn{display:inline-block;margin-top:20px;padding:12px 28px;background:var(--red);color:white;border-radius:8px;font-weight:700;text-decoration:none;font-family:'Sarabun',sans-serif;font-size:15px;}
+.confirm-page .back-btn{display:inline-block;margin-top:20px;padding:12px 28px;background:var(--red);color:white;border-radius:8px;font-weight:700;text-decoration:none;font-family:'Kanit',sans-serif;font-size:15px;}
 </style>
 </head>
 <body>
@@ -208,7 +209,7 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
   <div class="section-title">การจองของฉัน</div>
   <p class="note" style="margin-bottom:12px;">กรอกอีเมลที่ใช้จองเพื่อดูสถานะ</p>
   <div style="display:flex;gap:8px;margin-bottom:16px;">
-    <input type="email" id="searchEmail" placeholder="กรอกอีเมลของคุณ" style="flex:1;padding:10px 14px;border-radius:8px;border:2px solid var(--border);font-size:13px;font-family:'Sarabun',sans-serif;outline:none;">
+    <input type="email" id="searchEmail" placeholder="กรอกอีเมลของคุณ" style="flex:1;padding:10px 14px;border-radius:8px;border:2px solid var(--border);font-size:13px;font-family:'Kanit',sans-serif;outline:none;">
     <button class="btn" onclick="searchMyBookings()" style="max-width:100px;font-size:13px;padding:10px;">🔍 ค้นหา</button>
   </div>
   <div id="myBookingList"><div class="empty-state">กรอกอีเมลเพื่อดูการจอง</div></div>
@@ -581,7 +582,7 @@ function buildWeekDayTabs(weekDates){
   container.innerHTML='';
   weekDates.forEach(d=>{
     const btn=document.createElement('div');
-    btn.style.cssText='min-width:52px;padding:8px 6px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;flex-shrink:0;font-family:Sarabun,sans-serif;transition:all 0.2s;';
+    btn.style.cssText='min-width:52px;padding:8px 6px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;flex-shrink:0;font-family:'Kanit',sans-serif;transition:all 0.2s;';
     btn.innerHTML='<div style="font-size:10px;color:inherit;">'+(d.isToday?'<b>วันนี้</b>':d.dayName)+'</div><div style="font-size:17px;font-weight:700;">'+d.dayNum+'</div>';
     if(d.isToday){btn.style.background='var(--red)';btn.style.borderColor='var(--red)';btn.style.color='white';}
     btn.onclick=()=>{
