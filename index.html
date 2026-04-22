@@ -165,8 +165,8 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
     <p class="time-hint">⏰ รับจองตั้งแต่ 08:00 ถึง 02:00 น.</p>
   </div>
   <div class="divider"></div>
-  <div class="section-title">4. กรอกอีเมลผู้จอง (3 คน)</div>
-  <p class="note" style="margin-bottom:6px;">ใช้ได้เฉพาะอีเมล <b>@dome.tu.ac.th</b> เท่านั้น · ต้องยืนยันครบ 3 คนภายใน 2 ชั่วโมง · <b style="color:#e74c3c;">ห้ามใช้อีเมลซ้ำกัน</b></p>
+  <div class="section-title">4. กรอกอีเมลผู้จอง</div>
+  <p class="note" style="margin-bottom:6px;">ใช้ได้เฉพาะอีเมล <b>@dome.tu.ac.th</b> เท่านั้น · ต้องยืนยันครบทุกคนภายใน 2 ชั่วโมง · <b style="color:#e74c3c;">ห้ามใช้อีเมลซ้ำกัน</b></p>
   <div id="emailSendNotice" style="display:none;background:#e8f4ff;border:1.5px solid #90cdf4;border-radius:8px;padding:10px 14px;font-size:13px;color:#1a5276;margin-bottom:14px;font-weight:600;">📅 อีเมลยืนยันจะถูกส่งในวันที่ <span id="emailSendDate">—</span></div>
   <div class="student-fields">
     <div class="student-block">
@@ -181,6 +181,15 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
       <div class="student-label">👤 ผู้ร่วมจอง คนที่ 3</div>
       <div class="form-group"><label>อีเมล</label><input type="email" id="email3" placeholder="student@dome.tu.ac.th" oninput="onEmailInput(3)"><div class="email-hint" id="hint3"></div><div class="dup-warn" id="dup3">⚠️ อีเมลซ้ำกับผู้ร่วมจองคนอื่น</div></div>
     </div>
+    <!-- ห้องประชุม 1 เท่านั้น — คนที่ 4 และ 5 -->
+    <div class="student-block" id="emailBlock4" style="display:none;">
+      <div class="student-label">👤 ผู้ร่วมจอง คนที่ 4 <span style="font-size:11px;color:#888;">(เฉพาะห้องประชุม 1)</span></div>
+      <div class="form-group"><label>อีเมล</label><input type="email" id="email4" placeholder="student@dome.tu.ac.th" oninput="onEmailInput(4)"><div class="email-hint" id="hint4"></div><div class="dup-warn" id="dup4">⚠️ อีเมลซ้ำกับผู้ร่วมจองคนอื่น</div></div>
+    </div>
+    <div class="student-block" id="emailBlock5" style="display:none;">
+      <div class="student-label">👤 ผู้ร่วมจอง คนที่ 5 <span style="font-size:11px;color:#888;">(เฉพาะห้องประชุม 1)</span></div>
+      <div class="form-group"><label>อีเมล</label><input type="email" id="email5" placeholder="student@dome.tu.ac.th" oninput="onEmailInput(5)"><div class="email-hint" id="hint5"></div><div class="dup-warn" id="dup5">⚠️ อีเมลซ้ำกับผู้ร่วมจองคนอื่น</div></div>
+    </div>
   </div>
   <div class="summary" id="summary" style="display:none;">
     <div class="summary-title">สรุปการจอง</div>
@@ -192,6 +201,8 @@ h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}
     <div class="summary-row"><span>อีเมล 1</span><span id="sum-e1">—</span></div>
     <div class="summary-row"><span>อีเมล 2</span><span id="sum-e2">—</span></div>
     <div class="summary-row"><span>อีเมล 3</span><span id="sum-e3">—</span></div>
+    <div class="summary-row" id="sum-row4" style="display:none;"><span>อีเมล 4</span><span id="sum-e4">—</span></div>
+    <div class="summary-row" id="sum-row5" style="display:none;"><span>อีเมล 5</span><span id="sum-e5">—</span></div>
   </div>
   <button class="btn" onclick="submitBooking()" id="submitBtn" disabled>ส่งคำขอจอง + ส่งอีเมลยืนยัน →</button>
   <div class="success-box" id="successBox">
@@ -320,9 +331,28 @@ function generateDates(){
   }
 }
 
+const LARGE_ROOM='ห้องประชุม 1';
+function getMaxEmails(){return selectedRoom===LARGE_ROOM?5:3;}
+
 function selectRoom(el,name){
   document.querySelectorAll('.room-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');selectedRoom=name;onTimeChange();updateSummary();
+  el.classList.add('selected');selectedRoom=name;
+  // ✅ แสดง/ซ่อน email 4, 5 ตามห้อง
+  const isLarge=name===LARGE_ROOM;
+  document.getElementById('emailBlock4').style.display=isLarge?'block':'none';
+  document.getElementById('emailBlock5').style.display=isLarge?'block':'none';
+  document.getElementById('sum-row4').style.display=isLarge?'flex':'none';
+  document.getElementById('sum-row5').style.display=isLarge?'flex':'none';
+  // เคลียร์ email 4, 5 ถ้าเปลี่ยนจากห้องใหญ่เป็นเล็ก
+  if(!isLarge){
+    [4,5].forEach(i=>{
+      const inp=document.getElementById('email'+i);
+      if(inp){inp.value='';inp.className='';}
+      const h=document.getElementById('hint'+i);if(h)h.textContent='';
+      const d=document.getElementById('dup'+i);if(d)d.style.display='none';
+    });
+  }
+  onTimeChange();updateSummary();
 }
 
 function onTimeChange(){
@@ -361,15 +391,16 @@ function onEmailInput(n){
     inp.className='invalid-email';
     h.textContent='⚠️ ใช้ได้เฉพาะอีเมล @dome.tu.ac.th เท่านั้น';
     h.style.color='#e74c3c';
-  }
-  else{inp.className='valid-email';h.textContent='✓ ถูกต้อง';h.style.color='var(--green)';}
-  const all=[1,2,3].map(i=>document.getElementById('email'+i).value.trim().toLowerCase());
-  [1,2,3].forEach(i=>{
-    const dup=document.getElementById('dup'+i),val=all[i-1];
+  } else {inp.className='valid-email';h.textContent='✓ ถูกต้อง';h.style.color='var(--green)';}
+  const max=getMaxEmails();
+  const all=[...Array(max)].map((_,i)=>document.getElementById('email'+(i+1))?.value.trim().toLowerCase()||'');
+  [...Array(max)].forEach((_,i)=>{
+    const dup=document.getElementById('dup'+(i+1)),val=all[i];
+    if(!dup)return;
     if(!val||!validEmail(val)){dup.style.display='none';return;}
-    const d=all.filter((_,j)=>j!==i-1).includes(val);
+    const d=all.filter((_,j)=>j!==i).includes(val);
     dup.style.display=d?'block':'none';
-    if(d)document.getElementById('email'+i).className='invalid-email';
+    if(d)document.getElementById('email'+(i+1)).className='invalid-email';
   });
   updateSummary();updateSubmitBtn();
 }
@@ -403,24 +434,74 @@ function updateSummary(){
 }
 
 function validTUEmail(e){return validEmail(e)&&e.toLowerCase().endsWith('@dome.tu.ac.th');}
+function hasDups(){
+  const max=getMaxEmails();
+  const emails=[...Array(max)].map((_,i)=>document.getElementById('email'+(i+1))?.value.trim().toLowerCase()||'').filter(e=>validTUEmail(e));
+  return new Set(emails).size!==emails.length;
+}
+function updateSummary(){
+  const t=getTime(),dur=t.endMins-t.startMins,s=document.getElementById('summary');
+  const max=getMaxEmails();
+  if(selectedRoom){
+    s.style.display='block';
+    document.getElementById('sum-room').textContent=selectedRoom;
+    document.getElementById('sum-date').textContent=selectedDate||'—';
+    if(dur>=30&&dur<=180){document.getElementById('sum-slot').textContent=minsToStr(t.startMins)+' – '+minsToStr(t.endMins);document.getElementById('sum-duration').textContent=durStr(dur);}
+    else{document.getElementById('sum-slot').textContent='—';document.getElementById('sum-duration').textContent='—';}
+    const isNow=isToday(selectedDate);
+    const sendDate=selectedDate||'—';
+    document.getElementById('sum-senddate').textContent=sendDate+(isNow?' (วันนี้)':' (วันที่จอง)');
+    const notice=document.getElementById('emailSendNotice');
+    const noticeDate=document.getElementById('emailSendDate');
+    if(selectedDate){notice.style.display='block';noticeDate.textContent=sendDate+(isNow?' (วันนี้ ส่งทันที)':' — อีเมลจะถูกส่งในวันนั้น');}
+    else{notice.style.display='none';}
+    [...Array(max)].forEach((_,i)=>{
+      const el=document.getElementById('sum-e'+(i+1));
+      if(el)el.textContent=document.getElementById('email'+(i+1))?.value.trim()||'—';
+    });
+  }
+}
 function updateSubmitBtn(){
-  const e=[1,2,3].map(i=>document.getElementById('email'+i).value.trim());
+  const max=getMaxEmails();
+  const emails=[...Array(max)].map((_,i)=>document.getElementById('email'+(i+1))?.value.trim()||'');
   const isNow=isToday(selectedDate);
   const btn=document.getElementById('submitBtn');
   btn.textContent=isNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';
-  btn.disabled=!(selectedRoom&&timeValid()&&e.every(validTUEmail)&&!hasDups());
+  btn.disabled=!(selectedRoom&&timeValid()&&emails.every(validTUEmail)&&!hasDups());
 }
 
 async function submitBooking(){
-  const t=getTime(),emails=[1,2,3].map(i=>document.getElementById('email'+i).value.trim());
+  const t=getTime();
+  const max=getMaxEmails();
+  const emails=[...Array(max)].map((_,i)=>document.getElementById('email'+(i+1)).value.trim());
   const dur=t.endMins-t.startMins,slot=minsToStr(t.startMins)+' – '+minsToStr(t.endMins);
-  const tokens=[mkToken(),mkToken(),mkToken()];
+  const tokens=[...Array(max)].map(()=>mkToken());
   const id=Date.now().toString();
   const base=window.location.origin+window.location.pathname;
   const sendNow=isToday(selectedDate);
-  const booking={id,emails,tokens,room:selectedRoom,date:selectedDate,slot,startMins:t.startMins,endMins:t.endMins,durLabel:durStr(dur),confirmedBy:[],emailScheduled:!sendNow};
+
+  // ✅ เช็คว่าอีเมลใดๆ มี active booking ที่ยังไม่ถึงเวลาจอง 15 นาที หรือเปล่า
+  const mainEmail=emails[0].toLowerCase();
+  const conflict15=allWeekBookings.find(b=>{
+    if(!b.emails.map(e=>e.toLowerCase()).includes(mainEmail))return false;
+    // คำนวณเวลาจองจริง
+    const bDate=normalizeDate(b.date);
+    const today=todayStr();
+    if(bDate!==selectedDate&&bDate!==today)return false;
+    const now=new Date();
+    const nowMins=now.getHours()*60+now.getMinutes();
+    const minsUntil=b.startMins-nowMins;
+    // ถ้าเวลาจองน้อยกว่า 15 นาที ห้ามจองซ้อน
+    return minsUntil>=0&&minsUntil<15;
+  });
+  if(conflict15){
+    toast('❌ มีการจองที่ใกล้ถึงเวลาแล้ว ต้องยกเลิกก่อนเวลาจอง 15 นาที','red',5000);
+    return;
+  }
+
   const btn=document.getElementById('submitBtn');
   btn.disabled=true;btn.classList.add('loading');btn.textContent='💾 กำลังบันทึก...';
+  const booking={id,emails,tokens,room:selectedRoom,date:selectedDate,slot,startMins:t.startMins,endMins:t.endMins,durLabel:durStr(dur),confirmedBy:[],emailScheduled:!sendNow};
   try{
     await apiPost({action:'addBooking',booking});
     cache.push(booking);
@@ -430,22 +511,18 @@ async function submitBooking(){
     btn.textContent=sendNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';
     return;
   }
-
-  let sent=0,sentFlags=[false,false,false];
+  let sent=0,sentFlags=[...Array(max)].map(()=>false);
   if(sendNow){
-    // ส่งอีเมลทันทีถ้าเป็นวันนี้
     btn.textContent='📧 กำลังส่งอีเมล...';
-    for(let i=0;i<3;i++){
+    for(let i=0;i<max;i++){
       try{
-        await emailjs.send(EJS_SERVICE,EJS_TEMPLATE,{to_email:emails[i],student_role:ROLES[i],room:selectedRoom,date:selectedDate,slot,duration:durStr(dur),all_students:emails.join(', '),confirm_url:base+'?confirm='+tokens[i],from_name:'Law(รอ)จอง'});
+        await emailjs.send(EJS_SERVICE,EJS_TEMPLATE,{to_email:emails[i],student_role:ROLES[i]||'ผู้ร่วมจอง คนที่ '+(i+1),room:selectedRoom,date:selectedDate,slot,duration:durStr(dur),all_students:emails.join(', '),confirm_url:base+'?confirm='+tokens[i],from_name:'Law(รอ)จอง'});
         sentFlags[i]=true;sent++;
       }catch(e){console.error(e);}
     }
   }
-
   btn.classList.remove('loading');
   btn.textContent=sendNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';
-
   document.getElementById('successLine1').textContent='📍 '+selectedRoom+' · 📅 '+selectedDate;
   document.getElementById('successLine2').textContent='⏰ '+slot+' ('+durStr(dur)+')';
 
@@ -453,16 +530,15 @@ async function submitBooking(){
     document.getElementById('successBox').querySelector('h3').textContent='ส่งอีเมลยืนยันแล้ว!';
     document.getElementById('successBox').querySelector('.icon').textContent='📧';
     document.getElementById('successEmails').innerHTML=emails.map((e,i)=>(sentFlags[i]?'✅ ':'❌ ')+e).join('<br>');
-    document.getElementById('successBox').querySelector('.success-note').innerHTML='📬 ส่งลิงก์ยืนยันไปที่<br><span style="font-weight:400;">'+emails.join('<br>')+'</span><br><br>⏰ ทั้ง 3 คนต้องกดยืนยันในอีเมลภายใน <b>2 ชั่วโมง</b>';
-    toast(sent===3?'✅ ส่งอีเมลครบ 3 คนแล้ว!':'⚠️ ส่งอีเมลได้ '+sent+'/3',sent===3?'green':'red');
+    document.getElementById('successBox').querySelector('.success-note').innerHTML='📬 ส่งลิงก์ยืนยันไปที่<br><span style="font-weight:400;">'+emails.join('<br>')+'</span><br><br>⏰ ทุกคนต้องกดยืนยันในอีเมลภายใน <b>2 ชั่วโมง</b>';
+    toast(sent===max?'✅ ส่งอีเมลครบทุกคน!':'⚠️ ส่งได้ '+sent+'/'+max,sent===max?'green':'red');
   } else {
     document.getElementById('successBox').querySelector('h3').textContent='บันทึกการจองแล้ว!';
     document.getElementById('successBox').querySelector('.icon').textContent='📅';
     document.getElementById('successEmails').innerHTML=emails.join('<br>');
-    document.getElementById('successBox').querySelector('.success-note').innerHTML='📅 อีเมลยืนยันจะถูกส่งในวันที่ <b>'+selectedDate+'</b><br><br>📬 จะส่งไปที่<br><span style="font-weight:400;">'+emails.join('<br>')+'</span><br><br>⏰ เมื่อได้รับอีเมลแล้ว ต้องยืนยันครบ 3 คนภายใน <b>2 ชั่วโมง</b>';
+    document.getElementById('successBox').querySelector('.success-note').innerHTML='📅 อีเมลยืนยันจะถูกส่งในวันที่ <b>'+selectedDate+'</b><br><br>📬 จะส่งไปที่<br><span style="font-weight:400;">'+emails.join('<br>')+'</span><br><br>⏰ ต้องยืนยันครบทุกคนภายใน <b>2 ชั่วโมง</b>';
     toast('✅ บันทึกแล้ว! อีเมลจะส่งวันที่ '+selectedDate,'green');
   }
-
   document.getElementById('successBox').style.display='block';
   document.getElementById('submitBtn').style.display='none';
   document.getElementById('summary').style.display='none';
@@ -471,13 +547,27 @@ async function submitBooking(){
 }
 
 function resetForm(){
-  selectedRoom='';document.querySelectorAll('.room-card').forEach(c=>c.classList.remove('selected'));
-  [1,2,3].forEach(i=>{document.getElementById('email'+i).value='';document.getElementById('email'+i).className='';document.getElementById('hint'+i).textContent='';document.getElementById('dup'+i).style.display='none';});
-  document.getElementById('successBox').style.display='none';document.getElementById('submitBtn').style.display='block';document.getElementById('submitBtn').disabled=true;
+  selectedRoom='';
+  document.querySelectorAll('.room-card').forEach(c=>c.classList.remove('selected'));
+  [1,2,3,4,5].forEach(i=>{
+    const inp=document.getElementById('email'+i);if(inp){inp.value='';inp.className='';}
+    const h=document.getElementById('hint'+i);if(h)h.textContent='';
+    const d=document.getElementById('dup'+i);if(d)d.style.display='none';
+  });
+  // ซ่อน email 4, 5
+  document.getElementById('emailBlock4').style.display='none';
+  document.getElementById('emailBlock5').style.display='none';
+  document.getElementById('sum-row4').style.display='none';
+  document.getElementById('sum-row5').style.display='none';
+  document.getElementById('successBox').style.display='none';
+  document.getElementById('submitBtn').style.display='block';
+  document.getElementById('submitBtn').disabled=true;
   document.getElementById('summary').style.display='none';
   document.getElementById('emailSendNotice').style.display='none';
   document.getElementById('submitBtn').textContent='ส่งคำขอจอง + ส่งอีเมลยืนยัน →';
-  document.getElementById('startHour').value=9;document.getElementById('startMin').value=0;document.getElementById('endHour').value=10;document.getElementById('endMin').value=0;onTimeChange();
+  document.getElementById('startHour').value=9;document.getElementById('startMin').value=0;
+  document.getElementById('endHour').value=10;document.getElementById('endMin').value=0;
+  onTimeChange();
 }
 
 async function cancelBooking(id){
@@ -495,6 +585,18 @@ async function cancelBooking(id){
     toast('❌ คุณไม่มีสิทธิ์ยกเลิกการจองของคนอื่น','red',4000);return;
   }
   if(!confirm('ยืนยันยกเลิกการจอง?\n📍 '+booking.room+' · '+booking.date+' · '+booking.slot))return;
+
+  // ✅ เช็คว่าเหลือเวลาน้อยกว่า 15 นาทีก่อนเวลาจองหรือเปล่า
+  const bDateNorm=normalizeDate(booking.date);
+  if(bDateNorm===todayStr()){
+    const now=new Date();
+    const nowMins=now.getHours()*60+now.getMinutes();
+    const minsUntil=booking.startMins-nowMins;
+    if(minsUntil>=0&&minsUntil<15){
+      toast('❌ ยกเลิกไม่ได้ เหลือเวลาน้อยกว่า 15 นาทีก่อนเวลาจอง','red',4000);
+      return;
+    }
+  }
   try{
     await apiPost({action:'cancelBooking',id});
     allWeekBookings=allWeekBookings.filter(b=>b.id.toString()!==id.toString());
