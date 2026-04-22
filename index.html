@@ -656,8 +656,8 @@
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p1"><span class="s1">  let html='&lt;div style="font-size:13px;color:var(--gray);margin-bottom:12px;font-weight:600;"&gt;📅 '+dateStr+'&lt;/div&gt;';</span></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">  // ✅ ใช้ CSS grid ให้ทุกห้อง align ตรงกัน</span></p>
-<p class="p1"><span class="s1">  const gridStyle='display:grid;grid-template-columns:repeat(4,1fr);gap:3px;';</span></p>
+<p class="p1"><span class="s1">  // ✅ ใช้ fixed width ให้ทุก slot เท่ากัน</span></p>
+<p class="p1"><span class="s1">  const gridStyle='display:flex;flex-wrap:wrap;gap:3px;';</span></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p1"><span class="s1">  rooms.forEach(room=&gt;{</span></p>
 <p class="p1"><span class="s1">    const rb=dayBookings.filter(b=&gt;b.room===room);</span></p>
@@ -677,7 +677,7 @@
 <p class="p1"><span class="s1">      } else {</span></p>
 <p class="p1"><span class="s1">        bg='#e8f8f0';color='#27ae60';icon='🟢';</span></p>
 <p class="p1"><span class="s1">      }</span></p>
-<p class="p1"><span class="s1">      html+='&lt;div title="'+title+'" style="padding:4px 2px;border-radius:5px;font-size:9px;font-weight:600;background:'+bg+';color:'+color+';text-align:center;white-space:nowrap;overflow:hidden;"&gt;'+icon+' '+sl.l+'&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">      html+='&lt;div title="'+title+'" style="width:72px;padding:4px 0;border-radius:5px;font-size:9px;font-weight:600;background:'+bg+';color:'+color+';text-align:center;white-space:nowrap;"&gt;'+icon+' '+sl.l+'&lt;/div&gt;';</span></p>
 <p class="p1"><span class="s1">    });</span></p>
 <p class="p1"><span class="s1">    html+='&lt;/div&gt;&lt;/div&gt;';</span></p>
 <p class="p1"><span class="s1">  });</span></p>
