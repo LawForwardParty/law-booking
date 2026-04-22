@@ -1,1960 +1,698 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\froman\fcharset0 Times-Roman;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww29200\viewh16120\viewkind0
-\deftab720
-\pard\pardeftab720\partightenfactor0
-
-\f0\fs29\fsmilli14667 \cf0 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 <!DOCTYPE html>
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 <html lang="th">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <head>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <meta charset="UTF-8">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <title>Law(\uc0\u3619 \u3629 )\u3592 \u3629 \u3591 </title>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <style>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&display=swap');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 *\{margin:0;padding:0;box-sizing:border-box;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 :root\{--red:#c0392b;--red-dark:#a93226;--red-light:#fff5f5;--red-border:#f5c6c6;--green:#27ae60;--green-light:#e8f8f0;--orange:#e67e22;--orange-light:#fef6ec;--orange-border:#fad7a0;--gray:#888;--border:#eee;--text:#111;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 body\{font-family:'Kanit',sans-serif;background:#f9f9f9;color:var(--text);padding:20px;max-width:680px;margin:0 auto;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 h2\{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .subtitle\{font-size:13px;color:var(--gray);margin-bottom:20px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .tabs\{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .tab\{padding:8px 18px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;border:2px solid var(--border);background:white;color:#666;transition:all 0.2s;position:relative;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .tab.active\{background:var(--red);color:white;border-color:var(--red);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .rooms\{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:24px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .room-card\{background:white;border-radius:10px;padding:14px;border:2px solid var(--border);cursor:pointer;transition:all 0.2s;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .room-card:hover\{border-color:var(--red);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .room-card.selected\{border-color:var(--red);background:var(--red-light);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .room-name\{font-weight:700;font-size:14px;margin-bottom:4px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .room-detail\{font-size:12px;color:var(--gray);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .room-status\{display:inline-block;margin-top:8px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .status-available\{background:var(--green-light);color:var(--green);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .section-title\{font-size:14px;font-weight:700;margin-bottom:10px;color:#333;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .date-row\{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .date-btn\{min-width:58px;padding:8px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;transition:all 0.2s;font-family:'Kanit',sans-serif;flex-shrink:0;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .date-btn:hover\{border-color:var(--red);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .date-btn.active\{background:var(--red);border-color:var(--red);color:white;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .date-btn .day-name\{font-size:11px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .date-btn .day-num\{font-size:18px;font-weight:700;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-picker-box\{background:white;border:2px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-picker-row\{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-picker-row label\{font-size:13px;font-weight:600;color:#444;min-width:60px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-select-group\{display:flex;align-items:center;gap:6px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-select-group select\{padding:8px 10px;border-radius:8px;border:2px solid var(--border);font-size:14px;font-family:'Kanit',sans-serif;font-weight:600;background:white;cursor:pointer;outline:none;transition:border-color 0.2s;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-select-group select:focus\{border-color:var(--red);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-select-group span\{font-size:14px;font-weight:700;color:#555;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-duration-display\{display:inline-block;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:600;background:var(--red-light);color:var(--red);border:1.5px solid var(--red-border);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-duration-display.valid\{background:var(--green-light);color:var(--green);border-color:#a8e6c8;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-duration-display.invalid\{background:#ffeaea;color:var(--red);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .time-hint\{font-size:12px;color:var(--gray);margin-top:8px;line-height:1.6;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .conflict-warn\{background:#fff3cd;border:1.5px solid #ffc107;border-radius:8px;padding:10px 14px;font-size:12px;color:#856404;margin-top:8px;display:none;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .form-group\{margin-bottom:14px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .form-group label\{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#444;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .form-group input\{width:100%;padding:10px 14px;border-radius:8px;border:2px solid var(--border);font-size:13px;font-family:'Kanit',sans-serif;transition:border-color 0.2s;outline:none;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .form-group input:focus\{border-color:var(--red);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .form-group input.valid-email\{border-color:var(--green);background:#f6fff9;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .form-group input.invalid-email\{border-color:#e74c3c;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .email-hint\{font-size:11px;margin-top:4px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .dup-warn\{font-size:11px;color:#e74c3c;margin-top:4px;display:none;font-weight:600;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .student-fields\{background:white;border:2px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .student-block\{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .student-block:last-child\{margin-bottom:0;padding-bottom:0;border-bottom:none;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .student-label\{font-size:13px;font-weight:700;color:var(--red);margin-bottom:10px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .summary\{background:var(--red-light);border:2px solid var(--red-border);border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .summary-title\{font-weight:700;color:var(--red);margin-bottom:8px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .summary-row\{display:flex;justify-content:space-between;padding:3px 0;gap:10px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .summary-row span:first-child\{color:var(--gray);flex-shrink:0;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .summary-row span:last-child\{font-weight:600;text-align:right;word-break:break-all;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .btn\{width:100%;padding:12px;background:var(--red);color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Kanit',sans-serif;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .btn:hover:not(:disabled)\{background:var(--red-dark);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .btn:disabled\{background:#ddd;cursor:not-allowed;color:#aaa;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .btn.loading\{background:#aaa;cursor:not-allowed;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .success-box\{background:var(--orange-light);border:2px solid var(--orange-border);border-radius:10px;padding:24px;text-align:center;display:none;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .success-box .icon\{font-size:40px;margin-bottom:10px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .success-box h3\{color:var(--orange);font-size:18px;margin-bottom:8px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .success-box p\{font-size:13px;color:#555;margin-bottom:4px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .success-note\{font-size:12px;color:#7c5800;margin-top:12px;font-weight:600;background:white;border-radius:8px;padding:12px 14px;border:1.5px solid var(--orange-border);line-height:2;text-align:left;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .booking-card\{background:white;border-radius:12px;padding:16px;margin-bottom:14px;border:2px solid var(--border);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .booking-card.pending\{border-color:var(--orange-border);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .booking-card.confirmed\{border-color:#a8e6c8;background:#f6fffb;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .booking-card-header\{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:10px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .booking-card-title\{font-weight:700;font-size:15px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .booking-card-detail\{font-size:12px;color:var(--gray);margin-top:3px;line-height:1.7;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .status-badge\{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .badge-pending\{background:var(--orange-light);color:var(--orange);border:1.5px solid var(--orange-border);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .badge-confirmed\{background:var(--green-light);color:var(--green);border:1.5px solid #a8e6c8;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .email-confirm-list\{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .email-confirm-row\{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;background:#fafafa;border:1.5px solid var(--border);flex-wrap:wrap;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .email-confirm-row.row-confirmed\{background:var(--green-light);border-color:#a8e6c8;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .email-confirm-row.row-waiting\{background:var(--orange-light);border-color:var(--orange-border);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .ecr-dot\{width:10px;height:10px;border-radius:50%;flex-shrink:0;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .ecr-dot.green\{background:var(--green);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .ecr-dot.orange\{background:var(--orange);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .ecr-info\{flex:1;min-width:0;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .ecr-email\{font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .ecr-role\{font-size:11px;color:var(--gray);margin-top:1px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .ecr-status\{font-size:11px;font-weight:600;white-space:nowrap;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .ecr-status.s-confirmed\{color:var(--green);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .ecr-status.s-waiting\{color:var(--orange);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .card-actions\{display:flex;gap:8px;flex-wrap:wrap;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .cancel-btn\{background:none;border:2px solid #e74c3c;color:#e74c3c;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'Kanit',sans-serif;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .cancel-btn:hover\{background:#e74c3c;color:white;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .empty-state\{text-align:center;padding:40px 20px;color:#bbb;font-size:14px;line-height:2;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .loading-state\{text-align:center;padding:20px;color:var(--gray);font-size:13px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .divider\{height:1px;background:var(--border);margin:20px 0;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .note\{font-size:12px;color:#999;line-height:1.6;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .toast\{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:10px 20px;border-radius:8px;font-size:13px;font-family:'Kanit',sans-serif;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;max-width:90vw;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .toast.show\{opacity:1;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .toast.green\{background:var(--green);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .toast.red\{background:var(--red);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .confirm-page\{display:none;text-align:center;padding:60px 20px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .confirm-page .big-icon\{font-size:64px;margin-bottom:20px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .confirm-page h2\{font-size:24px;margin-bottom:10px;color:var(--red);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .confirm-page p\{font-size:14px;color:#555;line-height:1.8;margin-bottom:8px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 .confirm-page .back-btn\{display:inline-block;margin-top:20px;padding:12px 28px;background:var(--red);color:white;border-radius:8px;font-weight:700;text-decoration:none;font-family:'Kanit',sans-serif;font-size:15px;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </style>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </head>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <body>
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 <div class="confirm-page" id="confirmPage" style="display:none;">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="big-icon" id="confirmIcon">\uc0\u9203 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<h2 id="confirmTitle">\uc0\u3585 \u3635 \u3621 \u3633 \u3591 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 ...</h2>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<p id="confirmMsg">\uc0\u3585 \u3619 \u3640 \u3603 \u3634 \u3619 \u3629 \u3626 \u3633 \u3585 \u3588 \u3619 \u3641 \u3656 </p>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<a href="." class="back-btn">\uc0\u8592  \u3585 \u3621 \u3633 \u3610 \u3627 \u3609 \u3657 \u3634 \u3627 \u3621 \u3633 \u3585 </a>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </div>
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 <div id="mainApp">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <h2>Law(\uc0\u3619 \u3629 )\u3592 \u3629 \u3591 </h2>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <p class="subtitle">\uc0\u3619 \u3632 \u3610 \u3610 \u3592 \u3629 \u3591 \u3614 \u3639 \u3657 \u3609 \u3607 \u3637 \u3656 \u3588 \u3629 \u3617 \u3617 \u3656 \u3629 \u3609 \u3588 \u3603 \u3632 \u3609 \u3636 \u3605 \u3636 \u3624 \u3634 \u3626 \u3605 \u3619 \u3660  \'97 \u3592 \u3629 \u3591 \u3652 \u3604 \u3657 \u3586 \u3633 \u3657 \u3609 \u3605 \u3656 \u3635  30 \u3609 \u3634 \u3607 \u3637  \u3626 \u3641 \u3591 \u3626 \u3640 \u3604  3 \u3594 \u3633 \u3656 \u3623 \u3650 \u3617 \u3591 </p>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 <div class="tabs">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="tab active" onclick="showTab('book')">\uc0\u3592 \u3629 \u3591 \u3614 \u3639 \u3657 \u3609 \u3607 \u3637 \u3656 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="tab" onclick="showTab('mybooking')">\uc0\u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3586 \u3629 \u3591 \u3593 \u3633 \u3609 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="tab" onclick="showTab('status')">\uc0\u3605 \u3634 \u3619 \u3634 \u3591 \u3623 \u3656 \u3634 \u3591 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </div>
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 <div id="tab-book">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="section-title">1. \uc0\u3648 \u3621 \u3639 \u3629 \u3585 \u3614 \u3639 \u3657 \u3609 \u3607 \u3637 \u3656 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="rooms">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="room-card" onclick="selectRoom(this,'\uc0\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  1')"><div class="room-name">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  1</div><div class="room-detail">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  \'b7 \u3585 \u3621 \u3640 \u3656 \u3617 \u3651 \u3627 \u3597 \u3656 </div><div class="room-status status-available">\u9679  \u3623 \u3656 \u3634 \u3591 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="room-card" onclick="selectRoom(this,'\uc0\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  2')"><div class="room-name">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  2</div><div class="room-detail">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  \'b7 \u3585 \u3621 \u3640 \u3656 \u3617 \u3648 \u3621 \u3655 \u3585 </div><div class="room-status status-available">\u9679  \u3623 \u3656 \u3634 \u3591 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="room-card" onclick="selectRoom(this,'\uc0\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  3')"><div class="room-name">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  3</div><div class="room-detail">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  \'b7 \u3585 \u3621 \u3640 \u3656 \u3617 \u3648 \u3621 \u3655 \u3585 </div><div class="room-status status-available">\u9679  \u3623 \u3656 \u3634 \u3591 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="room-card" onclick="selectRoom(this,'\uc0\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  4')"><div class="room-name">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  4</div><div class="room-detail">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  \'b7 \u3585 \u3621 \u3640 \u3656 \u3617 \u3648 \u3621 \u3655 \u3585 </div><div class="room-status status-available">\u9679  \u3623 \u3656 \u3634 \u3591 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="room-card" onclick="selectRoom(this,'\uc0\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  5')"><div class="room-name">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  5</div><div class="room-detail">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  \'b7 \u3585 \u3621 \u3640 \u3656 \u3617 \u3648 \u3621 \u3655 \u3585 </div><div class="room-status status-available">\u9679  \u3623 \u3656 \u3634 \u3591 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="room-card" onclick="selectRoom(this,'\uc0\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  6')"><div class="room-name">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  6</div><div class="room-detail">\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  \'b7 \u3585 \u3621 \u3640 \u3656 \u3617 \u3648 \u3621 \u3655 \u3585 </div><div class="room-status status-available">\u9679  \u3623 \u3656 \u3634 \u3591 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="section-title">2. \uc0\u3648 \u3621 \u3639 \u3629 \u3585 \u3623 \u3633 \u3609 \u3607 \u3637 \u3656 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="date-row" id="dateRow"></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="section-title">3. \uc0\u3648 \u3621 \u3639 \u3629 \u3585 \u3648 \u3623 \u3621 \u3634  (\u3586 \u3633 \u3657 \u3609 \u3605 \u3656 \u3635  30 \u3609 \u3634 \u3607 \u3637  \'b7 \u3626 \u3641 \u3591 \u3626 \u3640 \u3604  3 \u3594 \u3633 \u3656 \u3623 \u3650 \u3617 \u3591 )</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="time-picker-box">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="time-picker-row">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<label>\uc0\u3648 \u3619 \u3636 \u3656 \u3617 </label>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<div class="time-select-group">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0<select id="startHour" onchange="onTimeChange()"></select>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0<span>:</span>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0<select id="startMin" onchange="onTimeChange()"><option value="0">00</option><option value="30">30</option></select>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="time-picker-row">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<label>\uc0\u3626 \u3636 \u3657 \u3609 \u3626 \u3640 \u3604 </label>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<div class="time-select-group">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0<select id="endHour" onchange="onTimeChange()"></select>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0<span>:</span>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0<select id="endMin" onchange="onTimeChange()"><option value="0">00</option><option value="30">30</option></select>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="time-picker-row">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<label>\uc0\u3619 \u3632 \u3618 \u3632 \u3648 \u3623 \u3621 \u3634 </label>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<div class="time-duration-display" id="durationDisplay">\'97 \uc0\u3609 \u3634 \u3607 \u3637 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="conflict-warn" id="conflictWarn">\uc0\u9888 \u65039  \u3594 \u3656 \u3623 \u3591 \u3648 \u3623 \u3621 \u3634 \u3609 \u3637 \u3657 \u3607 \u3633 \u3610 \u3595 \u3657 \u3629 \u3609 \u3585 \u3633 \u3610 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3607 \u3637 \u3656 \u3617 \u3637 \u3629 \u3618 \u3641 \u3656 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<p class="time-hint">\uc0\u9200  \u3619 \u3633 \u3610 \u3592 \u3629 \u3591 \u3605 \u3633 \u3657 \u3591 \u3649 \u3605 \u3656  08:00 \u3606 \u3638 \u3591  02:00 \u3609 .</p>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="divider"></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="section-title">4. \uc0\u3585 \u3619 \u3629 \u3585 \u3629 \u3637 \u3648 \u3617 \u3621 \u3612 \u3641 \u3657 \u3592 \u3629 \u3591  (3 \u3588 \u3609 )</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<p class="note" style="margin-bottom:6px;">\uc0\u3651 \u3594 \u3657 \u3652 \u3604 \u3657 \u3648 \u3593 \u3614 \u3634 \u3632 \u3629 \u3637 \u3648 \u3617 \u3621  <b>@dome.tu.ac.th</b> \u3648 \u3607 \u3656 \u3634 \u3609 \u3633 \u3657 \u3609  \'b7 \u3605 \u3657 \u3629 \u3591 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3588 \u3619 \u3610  3 \u3588 \u3609 \u3616 \u3634 \u3618 \u3651 \u3609  2 \u3594 \u3633 \u3656 \u3623 \u3650 \u3617 \u3591  \'b7 <b style="color:#e74c3c;">\u3627 \u3657 \u3634 \u3617 \u3651 \u3594 \u3657 \u3629 \u3637 \u3648 \u3617 \u3621 \u3595 \u3657 \u3635 \u3585 \u3633 \u3609 </b></p>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div id="emailSendNotice" style="display:none;background:#e8f4ff;border:1.5px solid #90cdf4;border-radius:8px;padding:10px 14px;font-size:13px;color:#1a5276;margin-bottom:14px;font-weight:600;">\uc0\u55357 \u56517  \u3629 \u3637 \u3648 \u3617 \u3621 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3592 \u3632 \u3606 \u3641 \u3585 \u3626 \u3656 \u3591 \u3651 \u3609 \u3623 \u3633 \u3609 \u3607 \u3637 \u3656  <span id="emailSendDate">\'97</span></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="student-fields">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="student-block">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<div class="student-label">\uc0\u55357 \u56420  \u3612 \u3641 \u3657 \u3592 \u3629 \u3591 \u3627 \u3621 \u3633 \u3585 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<div class="form-group"><label>\uc0\u3629 \u3637 \u3648 \u3617 \u3621 </label><input type="email" id="email1" placeholder="student@dome.tu.ac.th" oninput="onEmailInput(1)"><div class="email-hint" id="hint1"></div><div class="dup-warn" id="dup1">\u9888 \u65039  \u3629 \u3637 \u3648 \u3617 \u3621 \u3595 \u3657 \u3635 \u3585 \u3633 \u3610 \u3612 \u3641 \u3657 \u3619 \u3656 \u3623 \u3617 \u3592 \u3629 \u3591 \u3588 \u3609 \u3629 \u3639 \u3656 \u3609 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="student-block">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<div class="student-label">\uc0\u55357 \u56420  \u3612 \u3641 \u3657 \u3619 \u3656 \u3623 \u3617 \u3592 \u3629 \u3591  \u3588 \u3609 \u3607 \u3637 \u3656  2</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<div class="form-group"><label>\uc0\u3629 \u3637 \u3648 \u3617 \u3621 </label><input type="email" id="email2" placeholder="student@dome.tu.ac.th" oninput="onEmailInput(2)"><div class="email-hint" id="hint2"></div><div class="dup-warn" id="dup2">\u9888 \u65039  \u3629 \u3637 \u3648 \u3617 \u3621 \u3595 \u3657 \u3635 \u3585 \u3633 \u3610 \u3612 \u3641 \u3657 \u3619 \u3656 \u3623 \u3617 \u3592 \u3629 \u3591 \u3588 \u3609 \u3629 \u3639 \u3656 \u3609 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="student-block">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<div class="student-label">\uc0\u55357 \u56420  \u3612 \u3641 \u3657 \u3619 \u3656 \u3623 \u3617 \u3592 \u3629 \u3591  \u3588 \u3609 \u3607 \u3637 \u3656  3</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0<div class="form-group"><label>\uc0\u3629 \u3637 \u3648 \u3617 \u3621 </label><input type="email" id="email3" placeholder="student@dome.tu.ac.th" oninput="onEmailInput(3)"><div class="email-hint" id="hint3"></div><div class="dup-warn" id="dup3">\u9888 \u65039  \u3629 \u3637 \u3648 \u3617 \u3621 \u3595 \u3657 \u3635 \u3585 \u3633 \u3610 \u3612 \u3641 \u3657 \u3619 \u3656 \u3623 \u3617 \u3592 \u3629 \u3591 \u3588 \u3609 \u3629 \u3639 \u3656 \u3609 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="summary" id="summary" style="display:none;">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="summary-title">\uc0\u3626 \u3619 \u3640 \u3611 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="summary-row"><span>\uc0\u3614 \u3639 \u3657 \u3609 \u3607 \u3637 \u3656 </span><span id="sum-room">\'97</span></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="summary-row"><span>\uc0\u3623 \u3633 \u3609 \u3607 \u3637 \u3656 \u3592 \u3629 \u3591 </span><span id="sum-date">\'97</span></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="summary-row"><span>\uc0\u3648 \u3623 \u3621 \u3634 </span><span id="sum-slot">\'97</span></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="summary-row"><span>\uc0\u3619 \u3632 \u3618 \u3632 \u3648 \u3623 \u3621 \u3634 </span><span id="sum-duration">\'97</span></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="summary-row" style="background:#e8f4ff;border-radius:6px;padding:6px 8px;margin:4px 0;"><span style="color:#1a5276;font-weight:700;">\uc0\u55357 \u56517  \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3623 \u3633 \u3609 \u3607 \u3637 \u3656 </span><span id="sum-senddate" style="color:#1a5276;font-weight:700;">\'97</span></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="summary-row"><span>\uc0\u3629 \u3637 \u3648 \u3617 \u3621  1</span><span id="sum-e1">\'97</span></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="summary-row"><span>\uc0\u3629 \u3637 \u3648 \u3617 \u3621  2</span><span id="sum-e2">\'97</span></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="summary-row"><span>\uc0\u3629 \u3637 \u3648 \u3617 \u3621  3</span><span id="sum-e3">\'97</span></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<button class="btn" onclick="submitBooking()" id="submitBtn" disabled>\uc0\u3626 \u3656 \u3591 \u3588 \u3635 \u3586 \u3629 \u3592 \u3629 \u3591  + \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609  \u8594 </button>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="success-box" id="successBox">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="icon">\uc0\u55357 \u56551 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<h3>\uc0\u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3649 \u3621 \u3657 \u3623 !</h3>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<p id="successLine1"></p><p id="successLine2"></p>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<div class="success-note">\uc0\u55357 \u56556  \u3626 \u3656 \u3591 \u3621 \u3636 \u3591 \u3585 \u3660 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3652 \u3611 \u3607 \u3637 \u3656 <br><span id="successEmails" style="font-weight:400;"></span><br><br>\u9200  \u3607 \u3633 \u3657 \u3591  3 \u3588 \u3609 \u3605 \u3657 \u3629 \u3591 \u3585 \u3604 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3651 \u3609 \u3629 \u3637 \u3648 \u3617 \u3621 \u3616 \u3634 \u3618 \u3651 \u3609  <b>2 \u3594 \u3633 \u3656 \u3623 \u3650 \u3617 \u3591 </b></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<br>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<button class="btn" onclick="showTab('mybooking')" style="max-width:240px;margin:0 auto 10px;">\uc0\u3604 \u3641 \u3626 \u3606 \u3634 \u3609 \u3632  "\u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3586 \u3629 \u3591 \u3593 \u3633 \u3609 " \u8594 </button><br>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<button class="btn" onclick="resetForm()" style="max-width:130px;margin:0 auto;background:#eee;color:#666;font-size:13px;">\uc0\u3592 \u3629 \u3591 \u3651 \u3627 \u3617 \u3656 </button>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </div>
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 <div id="tab-mybooking" style="display:none;">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="section-title">\uc0\u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3586 \u3629 \u3591 \u3593 \u3633 \u3609 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<p class="note" style="margin-bottom:12px;">\uc0\u3585 \u3619 \u3629 \u3585 \u3629 \u3637 \u3648 \u3617 \u3621 \u3607 \u3637 \u3656 \u3651 \u3594 \u3657 \u3592 \u3629 \u3591 \u3648 \u3614 \u3639 \u3656 \u3629 \u3604 \u3641 \u3626 \u3606 \u3634 \u3609 \u3632 </p>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div style="display:flex;gap:8px;margin-bottom:16px;">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<input type="email" id="searchEmail" placeholder="\uc0\u3585 \u3619 \u3629 \u3585 \u3629 \u3637 \u3648 \u3617 \u3621 \u3607 \u3637 \u3656 \u3651 \u3594 \u3657 \u3592 \u3629 \u3591 " style="flex:1;padding:10px 14px;border-radius:8px;border:2px solid var(--border);font-size:13px;font-family:'Kanit',sans-serif;outline:none;">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0<button class="btn" onclick="searchMyBookings()" style="max-width:100px;font-size:13px;padding:10px;">\uc0\u55357 \u56589  \u3588 \u3657 \u3609 \u3627 \u3634 </button>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0</div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div id="myBookingList"><div class="empty-state">\uc0\u3585 \u3619 \u3629 \u3585 \u3629 \u3637 \u3648 \u3617 \u3621 \u3648 \u3614 \u3639 \u3656 \u3629 \u3604 \u3641 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 </div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </div>
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 <div id="tab-status" style="display:none;">
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div class="section-title">\uc0\u3605 \u3634 \u3619 \u3634 \u3591 \u3623 \u3656 \u3634 \u3591 /\u3652 \u3617 \u3656 \u3623 \u3656 \u3634 \u3591  \'97 \u3629 \u3634 \u3607 \u3636 \u3605 \u3618 \u3660 \u3609 \u3637 \u3657 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<!-- Week day tabs -->
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div id="weekDayTabs" style="display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;"></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<div id="statusTable"><div class="loading-state">\uc0\u9203  \u3585 \u3635 \u3621 \u3633 \u3591 \u3650 \u3627 \u3621 \u3604 ...</div></div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0<p class="note" style="margin-top:12px;">\uc0\u55357 \u57314  \u3623 \u3656 \u3634 \u3591  &nbsp;\'b7&nbsp; \u55357 \u57313  \u3619 \u3629 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609  &nbsp;\'b7&nbsp; \u55357 \u56628  \u3592 \u3629 \u3591 \u3649 \u3621 \u3657 \u3623 </p>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </div>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </div>
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 <div class="toast" id="toast"></div>
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 <script>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 const API='https://script.google.com/macros/s/AKfycbzm3D2klyrc19dVBk4w6jVLjE68bvqxjztEc7hXxTV-n-rFQfbMvI849bRxJar7-oQG2Q/exec';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 const EJS_SERVICE='service_lawforward',EJS_TEMPLATE='template_50orqck',EJS_PUBLIC='eMTRY9jv--i1hwgzm';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 emailjs.init(EJS_PUBLIC);
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 let selectedRoom='',selectedDate='';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 let cache=[];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 const CONFIRM_MS=2*60*60*1000;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 const ROLES=['\uc0\u3612 \u3641 \u3657 \u3592 \u3629 \u3591 \u3627 \u3621 \u3633 \u3585 ','\u3612 \u3641 \u3657 \u3619 \u3656 \u3623 \u3617 \u3592 \u3629 \u3591  \u3588 \u3609 \u3607 \u3637 \u3656  2','\u3612 \u3641 \u3657 \u3619 \u3656 \u3623 \u3617 \u3592 \u3629 \u3591  \u3588 \u3609 \u3607 \u3637 \u3656  3'];
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function toMins(h,m)\{return h*60+m;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function minsToStr(m)\{if(m>=1440)m-=1440;return String(Math.floor(m/60)%24).padStart(2,'0')+':'+String(m%60).padStart(2,'0');\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function getTime()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const sh=parseInt(document.getElementById('startHour').value),sm=parseInt(document.getElementById('startMin').value);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const eh=parseInt(document.getElementById('endHour').value),em=parseInt(document.getElementById('endMin').value);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0let s=toMins(sh,sm),e=toMins(eh,em);if(e<=s)e+=1440;return\{startMins:s,endMins:e\};
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function durStr(d)\{const h=Math.floor(d/60),m=d%60;return[(h?h+' \uc0\u3594 \u3633 \u3656 \u3623 \u3650 \u3617 \u3591 ':''),(m?m+' \u3609 \u3634 \u3607 \u3637 ':'')].filter(Boolean).join(' ');\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function validEmail(e)\{return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(e);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function isDone(b)\{return(b.confirmedBy||[]).length>=3;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function mkToken()\{return Math.random().toString(36).slice(2)+Date.now().toString(36);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function hasConflict(r,d,s,e)\{return cache.some(b=>normalizeDate(b.date)===d&&b.room===r&&s<b.endMins&&e>b.startMins);\}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function toast(msg,type,ms)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(type?' '+type:'');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0clearTimeout(t._t);t._t=setTimeout(()=>t.className='toast',ms||3000);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 async function apiGet(p)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const r=await fetch(API+'?'+new URLSearchParams(p));return r.json();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 async function apiPost(d)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const r=await fetch(API,\{method:'POST',body:JSON.stringify(d)\});return r.json();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 // \uc0\u9989  CONFIRM \'97 calls real API, works across all devices
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 async function handleUrlToken()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const p=new URLSearchParams(window.location.search);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const tk=p.get('confirm');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u9989  \u3606 \u3657 \u3634 \u3652 \u3617 \u3656 \u3617 \u3637  token \u3651 \u3609  URL \u3651 \u3627 \u3657 \u3649 \u3626 \u3604 \u3591  main app \u3611 \u3585 \u3605 \u3636 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(!tk||tk.trim()==='')\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('mainApp').style.display='block';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('confirmPage').style.display='none';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0return;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u3617 \u3637  token \'97 \u3649 \u3626 \u3604 \u3591 \u3627 \u3609 \u3657 \u3634 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('mainApp').style.display='none';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('confirmPage').style.display='block';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0try\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const res=await apiGet(\{action:'confirm',token:tk\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const s=res.status||'notfound';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const icons=\{ok:'\uc0\u9989 ',already:'\u9989 ',already_done:'\u9989 ',expired:'\u9200 ',notfound:'\u10060 '\};
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const titles=\{ok:'\uc0\u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3626 \u3635 \u3648 \u3619 \u3655 \u3592 ! \u55356 \u57225 ',already:'\u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3652 \u3611 \u3649 \u3621 \u3657 \u3623 ',already_done:'\u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3588 \u3619 \u3610 \u3649 \u3621 \u3657 \u3623 ',expired:'\u3621 \u3636 \u3591 \u3585 \u3660 \u3627 \u3617 \u3604 \u3629 \u3634 \u3618 \u3640 ',notfound:'\u3621 \u3636 \u3591 \u3585 \u3660 \u3652 \u3617 \u3656 \u3606 \u3641 \u3585 \u3605 \u3657 \u3629 \u3591 '\};
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const msgs=\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0ok:'<b>'+res.info+'</b><br><br>\uc0\u9989  \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3649 \u3621 \u3657 \u3623  '+(res.confirmedCount||'?')+'/3 \u3588 \u3609 <br>'+(res.isDone?'\u55356 \u57225  \u3588 \u3619 \u3610 \u3649 \u3621 \u3657 \u3623 ! \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3617 \u3637 \u3612 \u3621 \u3626 \u3617 \u3610 \u3641 \u3619 \u3603 \u3660 ':'\u3619 \u3629 \u3651 \u3627 \u3657 \u3588 \u3619 \u3610  3 \u3588 \u3609 \u3585 \u3656 \u3629 \u3609 '),
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0already:'\uc0\u3588 \u3640 \u3603 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3652 \u3611 \u3649 \u3621 \u3657 \u3623 <br><b>'+(res.info||'')+'</b>',
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0already_done:'\uc0\u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3609 \u3637 \u3657 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3588 \u3619 \u3610 \u3649 \u3621 \u3657 \u3623 <br><b>'+(res.info||'')+'</b>',
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0expired:'\uc0\u3621 \u3636 \u3591 \u3585 \u3660 \u3627 \u3617 \u3604 \u3629 \u3634 \u3618 \u3640 \u3649 \u3621 \u3657 \u3623  (\u3648 \u3585 \u3636 \u3609  2 \u3594 \u3633 \u3656 \u3623 \u3650 \u3617 \u3591 )<br>\u3585 \u3619 \u3640 \u3603 \u3634 \u3586 \u3629 \u3651 \u3627 \u3657 \u3612 \u3641 \u3657 \u3592 \u3629 \u3591 \u3627 \u3621 \u3633 \u3585 \u3592 \u3629 \u3591 \u3651 \u3627 \u3617 \u3656 ',
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0notfound:'\uc0\u3652 \u3617 \u3656 \u3614 \u3610 \u3586 \u3657 \u3629 \u3617 \u3641 \u3621 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3609 \u3637 \u3657 <br>\u3621 \u3636 \u3591 \u3585 \u3660 \u3629 \u3634 \u3592 \u3627 \u3617 \u3604 \u3629 \u3634 \u3618 \u3640 \u3649 \u3621 \u3657 \u3623 '
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\};
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('confirmIcon').textContent=icons[s]||'\uc0\u10060 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('confirmTitle').textContent=titles[s]||'\uc0\u3648 \u3585 \u3636 \u3604 \u3586 \u3657 \u3629 \u3612 \u3636 \u3604 \u3614 \u3621 \u3634 \u3604 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('confirmMsg').innerHTML=msgs[s]||'\uc0\u3585 \u3619 \u3640 \u3603 \u3634 \u3621 \u3629 \u3591 \u3651 \u3627 \u3617 \u3656 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}catch(e)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('confirmIcon').textContent='\uc0\u10060 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('confirmTitle').textContent='\uc0\u3648 \u3594 \u3639 \u3656 \u3629 \u3617 \u3605 \u3656 \u3629 \u3652 \u3617 \u3656 \u3652 \u3604 \u3657 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('confirmMsg').textContent='\uc0\u3585 \u3619 \u3640 \u3603 \u3634 \u3621 \u3629 \u3591 \u3651 \u3627 \u3617 \u3656 \u3629 \u3637 \u3585 \u3588 \u3619 \u3633 \u3657 \u3591 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function populateHours()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0[8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,0,1,2].forEach(h=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0['startHour','endHour'].forEach(id=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const o=document.createElement('option');o.value=h;o.textContent=String(h).padStart(2,'0');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0document.getElementById(id).appendChild(o);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('startHour').value=9;document.getElementById('endHour').value=10;onTimeChange();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function generateDates()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const row=document.getElementById('dateRow');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const days=['\uc0\u3629 \u3634 ','\u3592 ','\u3629 ','\u3614 ','\u3614 \u3620 ','\u3624 ','\u3626 '];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const today=new Date();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0for(let i=0;i<7;i++)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const d=new Date(today);d.setDate(today.getDate()+i);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const btn=document.createElement('div');btn.className='date-btn'+(i===0?' active':'');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0btn.innerHTML='<div class="day-name">'+days[d.getDay()]+'</div><div class="day-num">'+d.getDate()+'</div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const ds=d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0btn.onclick=()=>\{document.querySelectorAll('.date-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');selectedDate=ds;onTimeChange();updateSummary();loadStatus();\};
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(i===0)selectedDate=ds;row.appendChild(btn);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function selectRoom(el,name)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.querySelectorAll('.room-card').forEach(c=>c.classList.remove('selected'));
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0el.classList.add('selected');selectedRoom=name;onTimeChange();updateSummary();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function onTimeChange()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const t=getTime(),dur=t.endMins-t.startMins;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const d=document.getElementById('durationDisplay'),w=document.getElementById('conflictWarn');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(dur<=0)\{d.textContent='\uc0\u3585 \u3619 \u3640 \u3603 \u3634 \u3648 \u3621 \u3639 \u3629 \u3585 \u3648 \u3623 \u3621 \u3634 \u3626 \u3636 \u3657 \u3609 \u3626 \u3640 \u3604 \u3627 \u3621 \u3633 \u3591 \u3648 \u3623 \u3621 \u3634 \u3648 \u3619 \u3636 \u3656 \u3617 ';d.className='time-duration-display invalid';w.style.display='none';updateSubmitBtn();return;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(dur<30)\{d.textContent=dur+' \uc0\u3609 \u3634 \u3607 \u3637  \'97 \u3605 \u3657 \u3629 \u3591 \u3592 \u3629 \u3591 \u3629 \u3618 \u3656 \u3634 \u3591 \u3609 \u3657 \u3629 \u3618  30 \u3609 \u3634 \u3607 \u3637 ';d.className='time-duration-display invalid';w.style.display='none';updateSubmitBtn();return;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(dur>180)\{d.textContent=dur+' \uc0\u3609 \u3634 \u3607 \u3637  \'97 \u3648 \u3585 \u3636 \u3609  3 \u3594 \u3633 \u3656 \u3623 \u3650 \u3617 \u3591 ';d.className='time-duration-display invalid';w.style.display='none';updateSubmitBtn();return;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0d.textContent=durStr(dur);d.className='time-duration-display valid';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u9989  \u3649 \u3626 \u3604 \u3591 \u3619 \u3634 \u3618 \u3621 \u3632 \u3648 \u3629 \u3637 \u3618 \u3604 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3607 \u3637 \u3656 \u3607 \u3633 \u3610 \u3595 \u3657 \u3629 \u3609 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(selectedRoom)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const conflict=cache.find(b=>normalizeDate(b.date)===selectedDate&&b.room===selectedRoom&&t.startMins<b.endMins&&t.endMins>b.startMins);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(conflict)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const status=isDone(conflict)?'\uc0\u55357 \u56628  \u3592 \u3629 \u3591 \u3649 \u3621 \u3657 \u3623 ':'\u55357 \u57313  \u3619 \u3629 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0w.textContent='\uc0\u9888 \u65039  \u3607 \u3633 \u3610 \u3595 \u3657 \u3629 \u3609 \u3585 \u3633 \u3610  '+status+' \u3648 \u3623 \u3621 \u3634  '+conflict.slot+' \'97 \u3585 \u3619 \u3640 \u3603 \u3634 \u3648 \u3621 \u3639 \u3629 \u3585 \u3648 \u3623 \u3621 \u3634 \u3629 \u3639 \u3656 \u3609 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0w.style.display='block';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\} else \{w.style.display='none';\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\} else \{w.style.display='none';\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0updateSummary();updateSubmitBtn();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function timeValid()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const t=getTime(),d=t.endMins-t.startMins;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(d<30||d>180)return false;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u9989  \u3621 \u3655 \u3629 \u3585 \u3606 \u3657 \u3634 \u3607 \u3633 \u3610 \u3595 \u3657 \u3629 \u3609  normalize date \u3604 \u3657 \u3623 \u3618 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(selectedRoom&&cache.find(b=>normalizeDate(b.date)===selectedDate&&b.room===selectedRoom&&t.startMins<b.endMins&&t.endMins>b.startMins))return false;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0return true;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function hasDups()\{const e=[1,2,3].map(i=>document.getElementById('email'+i).value.trim().toLowerCase()).filter(x=>validEmail(x));return new Set(e).size!==e.length;\}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function onEmailInput(n)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const v=document.getElementById('email'+n).value.trim();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const h=document.getElementById('hint'+n),inp=document.getElementById('email'+n);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(!v)\{inp.className='';h.textContent='';h.style.color='';\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0else if(!validEmail(v))\{inp.className='invalid-email';h.textContent='\uc0\u3629 \u3637 \u3648 \u3617 \u3621 \u3652 \u3617 \u3656 \u3606 \u3641 \u3585 \u3605 \u3657 \u3629 \u3591 ';h.style.color='#e74c3c';\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0else if(!v.toLowerCase().endsWith('@dome.tu.ac.th'))\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0inp.className='invalid-email';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0h.textContent='\uc0\u9888 \u65039  \u3651 \u3594 \u3657 \u3652 \u3604 \u3657 \u3648 \u3593 \u3614 \u3634 \u3632 \u3629 \u3637 \u3648 \u3617 \u3621  @dome.tu.ac.th \u3648 \u3607 \u3656 \u3634 \u3609 \u3633 \u3657 \u3609 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0h.style.color='#e74c3c';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0else\{inp.className='valid-email';h.textContent='\uc0\u10003  \u3606 \u3641 \u3585 \u3605 \u3657 \u3629 \u3591 ';h.style.color='var(--green)';\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const all=[1,2,3].map(i=>document.getElementById('email'+i).value.trim().toLowerCase());
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0[1,2,3].forEach(i=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const dup=document.getElementById('dup'+i),val=all[i-1];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(!val||!validEmail(val))\{dup.style.display='none';return;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const d=all.filter((_,j)=>j!==i-1).includes(val);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0dup.style.display=d?'block':'none';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(d)document.getElementById('email'+i).className='invalid-email';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0updateSummary();updateSubmitBtn();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 // \uc0\u3588 \u3639 \u3609 \u3623 \u3633 \u3609 \u3607 \u3637 \u3656 \u3611 \u3633 \u3592 \u3592 \u3640 \u3610 \u3633 \u3609 \u3651 \u3609 \u3619 \u3641 \u3611 \u3649 \u3610 \u3610  d/m/yyyy
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function todayStr()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const d=new Date();return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 // \uc0\u3648 \u3611 \u3619 \u3637 \u3618 \u3610 \u3648 \u3607 \u3637 \u3618 \u3610 \u3623 \u3656 \u3634 \u3623 \u3633 \u3609 \u3607 \u3637 \u3656 \u3592 \u3629 \u3591 \u3648 \u3611 \u3655 \u3609 \u3623 \u3633 \u3609 \u3609 \u3637 \u3657 \u3627 \u3619 \u3639 \u3629 \u3652 \u3617 \u3656 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function isToday(dateStr)\{return dateStr===todayStr();\}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function updateSummary()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const t=getTime(),dur=t.endMins-t.startMins,s=document.getElementById('summary');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(selectedRoom)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0s.style.display='block';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('sum-room').textContent=selectedRoom;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('sum-date').textContent=selectedDate||'\'97';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(dur>=30&&dur<=180)\{document.getElementById('sum-slot').textContent=minsToStr(t.startMins)+' \'96 '+minsToStr(t.endMins);document.getElementById('sum-duration').textContent=durStr(dur);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0else\{document.getElementById('sum-slot').textContent='\'97';document.getElementById('sum-duration').textContent='\'97';\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0// \uc0\u3649 \u3626 \u3604 \u3591 \u3623 \u3633 \u3609 \u3607 \u3637 \u3656 \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const sendDate=selectedDate||'\'97';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const isNow=isToday(selectedDate);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('sum-senddate').textContent=sendDate+(isNow?' (\uc0\u3623 \u3633 \u3609 \u3609 \u3637 \u3657 )':' (\u3623 \u3633 \u3609 \u3607 \u3637 \u3656 \u3592 \u3629 \u3591 )');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0// \uc0\u3649 \u3626 \u3604 \u3591  notice \u3610 \u3609 \u3615 \u3629 \u3619 \u3660 \u3617 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const notice=document.getElementById('emailSendNotice');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const noticeDate=document.getElementById('emailSendDate');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(selectedDate)\{notice.style.display='block';noticeDate.textContent=sendDate+(isNow?' (\uc0\u3623 \u3633 \u3609 \u3609 \u3637 \u3657  \u3626 \u3656 \u3591 \u3607 \u3633 \u3609 \u3607 \u3637 )':' \'97 \u3629 \u3637 \u3648 \u3617 \u3621 \u3592 \u3632 \u3606 \u3641 \u3585 \u3626 \u3656 \u3591 \u3651 \u3609 \u3623 \u3633 \u3609 \u3609 \u3633 \u3657 \u3609 ');\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0else\{notice.style.display='none';\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0[1,2,3].forEach(i=>document.getElementById('sum-e'+i).textContent=document.getElementById('email'+i).value.trim()||'\'97');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function validTUEmail(e)\{return validEmail(e)&&e.toLowerCase().endsWith('@dome.tu.ac.th');\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function updateSubmitBtn()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const e=[1,2,3].map(i=>document.getElementById('email'+i).value.trim());
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const isNow=isToday(selectedDate);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const btn=document.getElementById('submitBtn');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0btn.textContent=isNow?'\uc0\u3626 \u3656 \u3591 \u3588 \u3635 \u3586 \u3629 \u3592 \u3629 \u3591  + \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3607 \u3633 \u3609 \u3607 \u3637  \u8594 ':'\u3610 \u3633 \u3609 \u3607 \u3638 \u3585 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591  (\u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621  '+selectedDate+') \u8594 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0btn.disabled=!(selectedRoom&&timeValid()&&e.every(validTUEmail)&&!hasDups());
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 async function submitBooking()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const t=getTime(),emails=[1,2,3].map(i=>document.getElementById('email'+i).value.trim());
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const dur=t.endMins-t.startMins,slot=minsToStr(t.startMins)+' \'96 '+minsToStr(t.endMins);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const tokens=[mkToken(),mkToken(),mkToken()];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const id=Date.now().toString();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const base=window.location.origin+window.location.pathname;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const sendNow=isToday(selectedDate);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const booking=\{id,emails,tokens,room:selectedRoom,date:selectedDate,slot,startMins:t.startMins,endMins:t.endMins,durLabel:durStr(dur),confirmedBy:[],emailScheduled:!sendNow\};
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const btn=document.getElementById('submitBtn');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0btn.disabled=true;btn.classList.add('loading');btn.textContent='\uc0\u55357 \u56510  \u3585 \u3635 \u3621 \u3633 \u3591 \u3610 \u3633 \u3609 \u3607 \u3638 \u3585 ...';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0try\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0await apiPost(\{action:'addBooking',booking\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0cache.push(booking);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}catch(e)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0toast('\uc0\u10060  \u3610 \u3633 \u3609 \u3607 \u3638 \u3585 \u3652 \u3617 \u3656 \u3626 \u3635 \u3648 \u3619 \u3655 \u3592  \u3621 \u3629 \u3591 \u3651 \u3627 \u3617 \u3656 ','red',4000);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0btn.disabled=false;btn.classList.remove('loading');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0btn.textContent=sendNow?'\uc0\u3626 \u3656 \u3591 \u3588 \u3635 \u3586 \u3629 \u3592 \u3629 \u3591  + \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3607 \u3633 \u3609 \u3607 \u3637  \u8594 ':'\u3610 \u3633 \u3609 \u3607 \u3638 \u3585 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591  (\u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621  '+selectedDate+') \u8594 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0return;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0let sent=0,sentFlags=[false,false,false];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(sendNow)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0// \uc0\u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3607 \u3633 \u3609 \u3607 \u3637 \u3606 \u3657 \u3634 \u3648 \u3611 \u3655 \u3609 \u3623 \u3633 \u3609 \u3609 \u3637 \u3657 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0btn.textContent='\uc0\u55357 \u56551  \u3585 \u3635 \u3621 \u3633 \u3591 \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 ...';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0for(let i=0;i<3;i++)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0try\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0await emailjs.send(EJS_SERVICE,EJS_TEMPLATE,\{to_email:emails[i],student_role:ROLES[i],room:selectedRoom,date:selectedDate,slot,duration:durStr(dur),all_students:emails.join(', '),confirm_url:base+'?confirm='+tokens[i],from_name:'Law(\uc0\u3619 \u3629 )\u3592 \u3629 \u3591 '\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0sentFlags[i]=true;sent++;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\}catch(e)\{console.error(e);\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0btn.classList.remove('loading');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0btn.textContent=sendNow?'\uc0\u3626 \u3656 \u3591 \u3588 \u3635 \u3586 \u3629 \u3592 \u3629 \u3591  + \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3607 \u3633 \u3609 \u3607 \u3637  \u8594 ':'\u3610 \u3633 \u3609 \u3607 \u3638 \u3585 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591  (\u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621  '+selectedDate+') \u8594 ';
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('successLine1').textContent='\uc0\u55357 \u56525  '+selectedRoom+' \'b7 \u55357 \u56517  '+selectedDate;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('successLine2').textContent='\uc0\u9200  '+slot+' ('+durStr(dur)+')';
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(sendNow)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('successBox').querySelector('h3').textContent='\uc0\u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3649 \u3621 \u3657 \u3623 !';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('successBox').querySelector('.icon').textContent='\uc0\u55357 \u56551 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('successEmails').innerHTML=emails.map((e,i)=>(sentFlags[i]?'\uc0\u9989  ':'\u10060  ')+e).join('<br>');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('successBox').querySelector('.success-note').innerHTML='\uc0\u55357 \u56556  \u3626 \u3656 \u3591 \u3621 \u3636 \u3591 \u3585 \u3660 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3652 \u3611 \u3607 \u3637 \u3656 <br><span style="font-weight:400;">'+emails.join('<br>')+'</span><br><br>\u9200  \u3607 \u3633 \u3657 \u3591  3 \u3588 \u3609 \u3605 \u3657 \u3629 \u3591 \u3585 \u3604 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3651 \u3609 \u3629 \u3637 \u3648 \u3617 \u3621 \u3616 \u3634 \u3618 \u3651 \u3609  <b>2 \u3594 \u3633 \u3656 \u3623 \u3650 \u3617 \u3591 </b>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0toast(sent===3?'\uc0\u9989  \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3588 \u3619 \u3610  3 \u3588 \u3609 \u3649 \u3621 \u3657 \u3623 !':'\u9888 \u65039  \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3652 \u3604 \u3657  '+sent+'/3',sent===3?'green':'red');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\} else \{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('successBox').querySelector('h3').textContent='\uc0\u3610 \u3633 \u3609 \u3607 \u3638 \u3585 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3649 \u3621 \u3657 \u3623 !';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('successBox').querySelector('.icon').textContent='\uc0\u55357 \u56517 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('successEmails').innerHTML=emails.join('<br>');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('successBox').querySelector('.success-note').innerHTML='\uc0\u55357 \u56517  \u3629 \u3637 \u3648 \u3617 \u3621 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3592 \u3632 \u3606 \u3641 \u3585 \u3626 \u3656 \u3591 \u3651 \u3609 \u3623 \u3633 \u3609 \u3607 \u3637 \u3656  <b>'+selectedDate+'</b><br><br>\u55357 \u56556  \u3592 \u3632 \u3626 \u3656 \u3591 \u3652 \u3611 \u3607 \u3637 \u3656 <br><span style="font-weight:400;">'+emails.join('<br>')+'</span><br><br>\u9200  \u3648 \u3617 \u3639 \u3656 \u3629 \u3652 \u3604 \u3657 \u3619 \u3633 \u3610 \u3629 \u3637 \u3648 \u3617 \u3621 \u3649 \u3621 \u3657 \u3623  \u3605 \u3657 \u3629 \u3591 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3588 \u3619 \u3610  3 \u3588 \u3609 \u3616 \u3634 \u3618 \u3651 \u3609  <b>2 \u3594 \u3633 \u3656 \u3623 \u3650 \u3617 \u3591 </b>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0toast('\uc0\u9989  \u3610 \u3633 \u3609 \u3607 \u3638 \u3585 \u3649 \u3621 \u3657 \u3623 ! \u3629 \u3637 \u3648 \u3617 \u3621 \u3592 \u3632 \u3626 \u3656 \u3591 \u3623 \u3633 \u3609 \u3607 \u3637 \u3656  '+selectedDate,'green');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('successBox').style.display='block';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('submitBtn').style.display='none';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('summary').style.display='none';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('emailSendNotice').style.display='none';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0loadStatus();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function resetForm()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0selectedRoom='';document.querySelectorAll('.room-card').forEach(c=>c.classList.remove('selected'));
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0[1,2,3].forEach(i=>\{document.getElementById('email'+i).value='';document.getElementById('email'+i).className='';document.getElementById('hint'+i).textContent='';document.getElementById('dup'+i).style.display='none';\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('successBox').style.display='none';document.getElementById('submitBtn').style.display='block';document.getElementById('submitBtn').disabled=true;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('summary').style.display='none';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('emailSendNotice').style.display='none';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('submitBtn').textContent='\uc0\u3626 \u3656 \u3591 \u3588 \u3635 \u3586 \u3629 \u3592 \u3629 \u3591  + \u3626 \u3656 \u3591 \u3629 \u3637 \u3648 \u3617 \u3621 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609  \u8594 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('startHour').value=9;document.getElementById('startMin').value=0;document.getElementById('endHour').value=10;document.getElementById('endMin').value=0;onTimeChange();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 async function cancelBooking(id)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const searchEmail=document.getElementById('searchEmail').value.trim().toLowerCase();
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u9989  \u3606 \u3657 \u3634  allWeekBookings \u3623 \u3656 \u3634 \u3591  \u3651 \u3627 \u3657 \u3650 \u3627 \u3621 \u3604 \u3651 \u3627 \u3617 \u3656 \u3585 \u3656 \u3629 \u3609 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(!allWeekBookings.length)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0try\{const res=await apiGet(\{action:'getBookings'\});allWeekBookings=res.bookings||[];\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0catch(e)\{toast('\uc0\u10060  \u3650 \u3627 \u3621 \u3604 \u3586 \u3657 \u3629 \u3617 \u3641 \u3621 \u3652 \u3617 \u3656 \u3626 \u3635 \u3648 \u3619 \u3655 \u3592 ','red');return;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0const booking=allWeekBookings.find(b=>b.id.toString()===id.toString());
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(!booking)\{toast('\uc0\u10060  \u3652 \u3617 \u3656 \u3614 \u3610 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3609 \u3637 \u3657 ','red');return;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(!booking.emails.map(e=>e.toLowerCase()).includes(searchEmail))\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0toast('\uc0\u10060  \u3588 \u3640 \u3603 \u3652 \u3617 \u3656 \u3617 \u3637 \u3626 \u3636 \u3607 \u3608 \u3636 \u3660 \u3618 \u3585 \u3648 \u3621 \u3636 \u3585 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3586 \u3629 \u3591 \u3588 \u3609 \u3629 \u3639 \u3656 \u3609 ','red',4000);return;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(!confirm('\uc0\u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3618 \u3585 \u3648 \u3621 \u3636 \u3585 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 ?\\n\u55357 \u56525  '+booking.room+' \'b7 '+booking.date+' \'b7 '+booking.slot))return;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0try\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0await apiPost(\{action:'cancelBooking',id\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0allWeekBookings=allWeekBookings.filter(b=>b.id.toString()!==id.toString());
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0cache=cache.filter(b=>b.id.toString()!==id.toString());
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0toast('\uc0\u9989  \u3618 \u3585 \u3648 \u3621 \u3636 \u3585 \u3649 \u3621 \u3657 \u3623 ','green');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0await searchMyBookings();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0renderStatusForDate(statusViewDate||todayStr());
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}catch(e)\{toast('\uc0\u10060  \u3618 \u3585 \u3648 \u3621 \u3636 \u3585 \u3652 \u3617 \u3656 \u3626 \u3635 \u3648 \u3619 \u3655 \u3592 ','red');\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 async function searchMyBookings()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const email=document.getElementById('searchEmail').value.trim().toLowerCase();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u9989  \u3588 \u3657 \u3609 \u3627 \u3634 \u3652 \u3604 \u3657 \u3604 \u3657 \u3623 \u3618 \u3629 \u3637 \u3648 \u3617 \u3621 \u3651 \u3604 \u3585 \u3655 \u3652 \u3604 \u3657  \u3652 \u3617 \u3656 \u3610 \u3633 \u3591 \u3588 \u3633 \u3610  domain
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(!validEmail(email))\{toast('\uc0\u3585 \u3619 \u3640 \u3603 \u3634 \u3585 \u3619 \u3629 \u3585 \u3629 \u3637 \u3648 \u3617 \u3621 \u3651 \u3627 \u3657 \u3606 \u3641 \u3585 \u3605 \u3657 \u3629 \u3591 ','red');return;\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('myBookingList').innerHTML='<div class="loading-state">\uc0\u9203  \u3585 \u3635 \u3621 \u3633 \u3591 \u3588 \u3657 \u3609 \u3627 \u3634 ...</div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0try\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0// \uc0\u9989  \u3650 \u3627 \u3621 \u3604 \u3586 \u3657 \u3629 \u3617 \u3641 \u3621 \u3651 \u3627 \u3617 \u3656 \u3607 \u3640 \u3585 \u3588 \u3619 \u3633 \u3657 \u3591  \u3652 \u3617 \u3656  filter \u3604 \u3657 \u3623 \u3618  date \u3648 \u3614 \u3639 \u3656 \u3629 \u3651 \u3627 \u3657 \u3652 \u3604 \u3657 \u3586 \u3657 \u3629 \u3617 \u3641 \u3621 \u3588 \u3619 \u3610 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const res=await apiGet(\{action:'getBookings'\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0allWeekBookings=res.bookings||[];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0cache=allWeekBookings.filter(b=>normalizeDate(b.date)===selectedDate);
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0// \uc0\u9989  \u3629 \u3633 \u3611 \u3648 \u3604 \u3605 \u3605 \u3634 \u3619 \u3634 \u3591 \u3623 \u3656 \u3634 \u3591 \u3604 \u3657 \u3623 \u3618 \u3607 \u3633 \u3609 \u3607 \u3637 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(statusViewDate) renderStatusForDate(statusViewDate);
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const mine=allWeekBookings.filter(b=>(b.emails||[]).map(e=>e.toLowerCase()).includes(email));
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(!mine.length)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0document.getElementById('myBookingList').innerHTML='<div class="empty-state">\uc0\u3652 \u3617 \u3656 \u3614 \u3610 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3626 \u3635 \u3627 \u3619 \u3633 \u3610 \u3629 \u3637 \u3648 \u3617 \u3621 \u3609 \u3637 \u3657 </div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0return;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('myBookingList').innerHTML=mine.map(b=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const done=isDone(b),n=(b.confirmedBy||[]).length;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const badge=done?'<span class="status-badge badge-confirmed">\uc0\u9989  \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3588 \u3619 \u3610 </span>':'<span class="status-badge badge-pending">\u9203  \u3619 \u3629 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609  '+n+'/3</span>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const statusBox=done
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0?'<div style="padding:8px 12px;background:var(--green-light);border-radius:8px;font-size:12px;color:var(--green);font-weight:600;margin-bottom:12px;">\uc0\u9989  \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3588 \u3619 \u3610 \u3649 \u3621 \u3657 \u3623  \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 \u3617 \u3637 \u3612 \u3621 \u3626 \u3617 \u3610 \u3641 \u3619 \u3603 \u3660 </div>'
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0:'<div style="padding:8px 12px;background:var(--orange-light);border-radius:8px;font-size:12px;color:var(--orange);font-weight:600;margin-bottom:12px;">\uc0\u9203  \u3619 \u3629 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609  '+n+'/3 \u3588 \u3609 </div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const rows=(b.emails||[]).map((em,i)=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0const confirmed=(b.confirmedBy||[]).includes(i.toString())||(b.confirmedBy||[]).includes(i);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0return '<div class="email-confirm-row '+(confirmed?'row-confirmed':'row-waiting')+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0'"><div class="ecr-dot '+(confirmed?'green':'orange')+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0'"></div><div class="ecr-info"><div class="ecr-email">'+em+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0'</div><div class="ecr-role">'+ROLES[i]+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0'</div></div><div class="ecr-status '+(confirmed?'s-confirmed':'s-waiting')+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0'">'+(confirmed?'\uc0\u9989  \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 \u3649 \u3621 \u3657 \u3623 ':'\u55357 \u56551  \u3619 \u3629 \u3585 \u3604 \u3618 \u3639 \u3609 \u3618 \u3633 \u3609 ')+'</div></div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\}).join('');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const canCancel=(b.emails||[]).map(e=>e.toLowerCase()).includes(email);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const cancelBtn=canCancel
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0?'<button class="cancel-btn" onclick="cancelBooking(\\''+b.id+'\\')">\uc0\u3618 \u3585 \u3648 \u3621 \u3636 \u3585 \u3585 \u3634 \u3619 \u3592 \u3629 \u3591 </button>':'';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0// \uc0\u9989  \u3649 \u3626 \u3604 \u3591  date \u3607 \u3637 \u3656 \u3629 \u3656 \u3634 \u3609 \u3591 \u3656 \u3634 \u3618 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const displayDate=normalizeDate(b.date);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0return '<div class="booking-card '+(done?'confirmed':'pending')+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0'"><div class="booking-card-header"><div><div class="booking-card-title">\uc0\u55357 \u56525  '+b.room+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0'</div><div class="booking-card-detail">\uc0\u55357 \u56517  '+displayDate+' \'b7 \u9200  '+b.slot+' ('+b.durLabel+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0')</div></div>'+badge+'</div>'+statusBox+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0'<div class="email-confirm-list">'+rows+'</div>'+
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0'<div class="card-actions">'+cancelBtn+'</div></div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\}).join('');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}catch(e)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('myBookingList').innerHTML='<div class="empty-state">\uc0\u10060  \u3650 \u3627 \u3621 \u3604 \u3652 \u3617 \u3656 \u3626 \u3635 \u3648 \u3619 \u3655 \u3592 </div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 // \uc0\u9989  \u3649 \u3611 \u3621 \u3591  date \u3651 \u3627 \u3657 \u3648 \u3611 \u3655 \u3609  d/m/yyyy \u3652 \u3617 \u3656 \u3623 \u3656 \u3634 \u3592 \u3632 \u3617 \u3634 \u3651 \u3609 \u3619 \u3641 \u3611 \u3649 \u3610 \u3610 \u3652 \u3627 \u3609 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function normalizeDate(dateStr)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(!dateStr)return'';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u3606 \u3657 \u3634 \u3648 \u3611 \u3655 \u3609  ISO format \u3648 \u3594 \u3656 \u3609  2026-04-17T00:00:00.000Z
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(dateStr.includes('T')||dateStr.includes('-'))\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const d=new Date(dateStr);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u3606 \u3657 \u3634 \u3648 \u3611 \u3655 \u3609  d/m/yyyy \u3629 \u3618 \u3641 \u3656 \u3649 \u3621 \u3657 \u3623 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0return dateStr;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function getWeekDates()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const today=new Date();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const day=today.getDay(); // 0=\uc0\u3629 \u3634 , 1=\u3592  ...
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const mon=new Date(today);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0mon.setDate(today.getDate()-(day===0?6:day-1)); // \uc0\u3648 \u3619 \u3636 \u3656 \u3617 \u3592 \u3634 \u3585 \u3592 \u3633 \u3609 \u3607 \u3619 \u3660 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const days=['\uc0\u3592 ','\u3629 ','\u3614 ','\u3614 \u3620 ','\u3624 ','\u3626 ','\u3629 \u3634 '];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const result=[];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0for(let i=0;i<7;i++)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const d=new Date(mon);d.setDate(mon.getDate()+i);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const ds=d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0result.push(\{dateStr:ds,dayName:days[i],dayNum:d.getDate(),isToday:ds===todayStr()\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0return result;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 let statusViewDate=''; // \uc0\u3623 \u3633 \u3609 \u3607 \u3637 \u3656 \u3585 \u3635 \u3621 \u3633 \u3591 \u3604 \u3641 \u3629 \u3618 \u3641 \u3656 \u3651 \u3609  status tab
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function buildWeekDayTabs(weekDates)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const container=document.getElementById('weekDayTabs');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0container.innerHTML='';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0weekDates.forEach(d=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const btn=document.createElement('div');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0btn.style.cssText='min-width:52px;padding:8px 6px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;flex-shrink:0;font-family:Kanit,sans-serif;transition:all 0.2s;';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0btn.innerHTML='<div style="font-size:10px;color:inherit;">'+(d.isToday?'<b>\uc0\u3623 \u3633 \u3609 \u3609 \u3637 \u3657 </b>':d.dayName)+'</div><div style="font-size:17px;font-weight:700;">'+d.dayNum+'</div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(d.isToday)\{btn.style.background='var(--red)';btn.style.borderColor='var(--red)';btn.style.color='white';\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0btn.onclick=()=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0container.querySelectorAll('div').forEach(b=>\{b.style.background='white';b.style.borderColor='var(--border)';b.style.color='var(--text)';\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0btn.style.background='var(--red)';btn.style.borderColor='var(--red)';btn.style.color='white';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0statusViewDate=d.dateStr;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0renderStatusForDate(d.dateStr);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\};
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0if(d.isToday)statusViewDate=d.dateStr;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0container.appendChild(btn);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 let allWeekBookings=[];
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 async function loadStatus()\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('statusTable').innerHTML='<div class="loading-state">\uc0\u9203  \u3585 \u3635 \u3621 \u3633 \u3591 \u3650 \u3627 \u3621 \u3604 ...</div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const weekDates=getWeekDates();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0buildWeekDayTabs(weekDates);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0try\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0// \uc0\u9989  \u3604 \u3638 \u3591 \u3607 \u3633 \u3657 \u3591 \u3627 \u3617 \u3604  \u3652 \u3617 \u3656  filter date \u3648 \u3614 \u3639 \u3656 \u3629 \u3651 \u3627 \u3657 \u3588 \u3619 \u3610 \u3607 \u3640 \u3585 \u3623 \u3633 \u3609 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const res=await apiGet(\{action:'getBookings'\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0allWeekBookings=res.bookings||[];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0cache=allWeekBookings.filter(b=>normalizeDate(b.date)===selectedDate);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0renderStatusForDate(statusViewDate||todayStr());
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0onTimeChange();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}catch(e)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0document.getElementById('statusTable').innerHTML='<div class="empty-state">\uc0\u10060  \u3650 \u3627 \u3621 \u3604 \u3652 \u3617 \u3656 \u3626 \u3635 \u3648 \u3619 \u3655 \u3592 </div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 function renderStatusForDate(dateStr)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const rooms=['\uc0\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  1','\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  2','\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  3','\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  4','\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  5','\u3627 \u3657 \u3629 \u3591 \u3611 \u3619 \u3632 \u3594 \u3640 \u3617  6'];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const dayBookings=allWeekBookings.filter(b=>normalizeDate(b.date)===dateStr);
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u3626 \u3619 \u3657 \u3634 \u3591  slots \u3607 \u3637 \u3621 \u3632  30 \u3609 \u3634 \u3607 \u3637 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const slots=[];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const hours=[8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,0,1];
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0hours.forEach(h=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0[0,30].forEach(m=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const s=toMins(h,m);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const e=s+30;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const sh=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const eh=String(Math.floor(e/60)%24).padStart(2,'0')+':'+String(e%60).padStart(2,'0');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0slots.push(\{l:sh+'\'96'+eh,s,e\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\});
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0let html='<div style="font-size:13px;color:var(--gray);margin-bottom:12px;font-weight:600;">\uc0\u55357 \u56517  '+dateStr+'</div>';
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0// \uc0\u9989  \u3651 \u3594 \u3657  CSS grid \u3651 \u3627 \u3657 \u3607 \u3640 \u3585 \u3627 \u3657 \u3629 \u3591  align \u3605 \u3619 \u3591 \u3585 \u3633 \u3609 
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0const gridStyle='display:grid;grid-template-columns:repeat(4,1fr);gap:3px;';
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 \'a0\'a0rooms.forEach(room=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0const rb=dayBookings.filter(b=>b.room===room);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0html+='<div style="margin-bottom:14px;background:white;border-radius:10px;padding:12px;border:1.5px solid var(--border);">';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0html+='<div style="font-weight:700;font-size:13px;margin-bottom:8px;color:#333;">'+room+'</div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0html+='<div style="'+gridStyle+'">';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0slots.forEach(sl=>\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const hit=rb.find(b=>b.startMins<=sl.s&&b.endMins>=sl.e);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0const partial=!hit&&rb.find(b=>b.startMins<sl.e&&b.endMins>sl.s);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0let bg,color,icon,title='';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0if(hit)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0const d=isDone(hit);
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0bg=d?'#ffeaea':'#fffbf0';color=d?'#c0392b':'#e67e22';icon=d?'\uc0\u55357 \u56628 ':'\u55357 \u57313 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0title=hit.slot+' ('+hit.durLabel+')';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\} else if(partial)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0bg='#fffbf0';color='#e67e22';icon='\uc0\u55357 \u57313 ';title='\u3607 \u3633 \u3610 \u3595 \u3657 \u3629 \u3609 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\} else \{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0bg='#e8f8f0';color='#27ae60';icon='\uc0\u55357 \u57314 ';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0\}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\'a0\'a0html+='<div title="'+title+'" style="padding:4px 2px;border-radius:5px;font-size:9px;font-weight:600;background:'+bg+';color:'+color+';text-align:center;white-space:nowrap;overflow:hidden;">'+icon+' '+sl.l+'</div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\'a0\'a0html+='</div></div>';
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0\});
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.getElementById('statusTable').innerHTML=html;
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 function showTab(tab)\{
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0['book','mybooking','status'].forEach(t=>document.getElementById('tab-'+t).style.display=t===tab?'block':'none');
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',['book','mybooking','status'][i]===tab));
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \'a0\'a0if(tab==='status')loadStatus();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 \}
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 generateDates();populateHours();handleUrlToken();loadStatus();
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </script>
-\f1\fs24 \
-\
-
-\f0\fs29\fsmilli14667 </body>
-\f1\fs24 \
-
-\f0\fs29\fsmilli14667 </html>
-\f1\fs24 \
-}
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.7px Arial; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;html lang="th"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;title&gt;Law(รอ)จอง&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1">&lt;script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;style&gt;</span></p>
+<p class="p1"><span class="s1">@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&amp;display=swap');</span></p>
+<p class="p1"><span class="s1">*{margin:0;padding:0;box-sizing:border-box;}</span></p>
+<p class="p1"><span class="s1">:root{--red:#c0392b;--red-dark:#a93226;--red-light:#fff5f5;--red-border:#f5c6c6;--green:#27ae60;--green-light:#e8f8f0;--orange:#e67e22;--orange-light:#fef6ec;--orange-border:#fad7a0;--gray:#888;--border:#eee;--text:#111;}</span></p>
+<p class="p1"><span class="s1">body{font-family:'Kanit',sans-serif;background:#f9f9f9;color:var(--text);padding:20px;max-width:680px;margin:0 auto;}</span></p>
+<p class="p1"><span class="s1">h2{font-size:22px;font-weight:700;margin-bottom:4px;color:var(--red);}</span></p>
+<p class="p1"><span class="s1">.subtitle{font-size:13px;color:var(--gray);margin-bottom:20px;}</span></p>
+<p class="p1"><span class="s1">.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}</span></p>
+<p class="p1"><span class="s1">.tab{padding:8px 18px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;border:2px solid var(--border);background:white;color:#666;transition:all 0.2s;position:relative;}</span></p>
+<p class="p1"><span class="s1">.tab.active{background:var(--red);color:white;border-color:var(--red);}</span></p>
+<p class="p1"><span class="s1">.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:24px;}</span></p>
+<p class="p1"><span class="s1">.room-card{background:white;border-radius:10px;padding:14px;border:2px solid var(--border);cursor:pointer;transition:all 0.2s;}</span></p>
+<p class="p1"><span class="s1">.room-card:hover{border-color:var(--red);}</span></p>
+<p class="p1"><span class="s1">.room-card.selected{border-color:var(--red);background:var(--red-light);}</span></p>
+<p class="p1"><span class="s1">.room-name{font-weight:700;font-size:14px;margin-bottom:4px;}</span></p>
+<p class="p1"><span class="s1">.room-detail{font-size:12px;color:var(--gray);}</span></p>
+<p class="p1"><span class="s1">.room-status{display:inline-block;margin-top:8px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;}</span></p>
+<p class="p1"><span class="s1">.status-available{background:var(--green-light);color:var(--green);}</span></p>
+<p class="p1"><span class="s1">.section-title{font-size:14px;font-weight:700;margin-bottom:10px;color:#333;}</span></p>
+<p class="p1"><span class="s1">.date-row{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;}</span></p>
+<p class="p1"><span class="s1">.date-btn{min-width:58px;padding:8px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;transition:all 0.2s;font-family:'Kanit',sans-serif;flex-shrink:0;}</span></p>
+<p class="p1"><span class="s1">.date-btn:hover{border-color:var(--red);}</span></p>
+<p class="p1"><span class="s1">.date-btn.active{background:var(--red);border-color:var(--red);color:white;}</span></p>
+<p class="p1"><span class="s1">.date-btn .day-name{font-size:11px;}</span></p>
+<p class="p1"><span class="s1">.date-btn .day-num{font-size:18px;font-weight:700;}</span></p>
+<p class="p1"><span class="s1">.time-picker-box{background:white;border:2px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;}</span></p>
+<p class="p1"><span class="s1">.time-picker-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;}</span></p>
+<p class="p1"><span class="s1">.time-picker-row label{font-size:13px;font-weight:600;color:#444;min-width:60px;}</span></p>
+<p class="p1"><span class="s1">.time-select-group{display:flex;align-items:center;gap:6px;}</span></p>
+<p class="p1"><span class="s1">.time-select-group select{padding:8px 10px;border-radius:8px;border:2px solid var(--border);font-size:14px;font-family:'Kanit',sans-serif;font-weight:600;background:white;cursor:pointer;outline:none;transition:border-color 0.2s;}</span></p>
+<p class="p1"><span class="s1">.time-select-group select:focus{border-color:var(--red);}</span></p>
+<p class="p1"><span class="s1">.time-select-group span{font-size:14px;font-weight:700;color:#555;}</span></p>
+<p class="p1"><span class="s1">.time-duration-display{display:inline-block;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:600;background:var(--red-light);color:var(--red);border:1.5px solid var(--red-border);}</span></p>
+<p class="p1"><span class="s1">.time-duration-display.valid{background:var(--green-light);color:var(--green);border-color:#a8e6c8;}</span></p>
+<p class="p1"><span class="s1">.time-duration-display.invalid{background:#ffeaea;color:var(--red);}</span></p>
+<p class="p1"><span class="s1">.time-hint{font-size:12px;color:var(--gray);margin-top:8px;line-height:1.6;}</span></p>
+<p class="p1"><span class="s1">.conflict-warn{background:#fff3cd;border:1.5px solid #ffc107;border-radius:8px;padding:10px 14px;font-size:12px;color:#856404;margin-top:8px;display:none;}</span></p>
+<p class="p1"><span class="s1">.form-group{margin-bottom:14px;}</span></p>
+<p class="p1"><span class="s1">.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#444;}</span></p>
+<p class="p1"><span class="s1">.form-group input{width:100%;padding:10px 14px;border-radius:8px;border:2px solid var(--border);font-size:13px;font-family:'Kanit',sans-serif;transition:border-color 0.2s;outline:none;}</span></p>
+<p class="p1"><span class="s1">.form-group input:focus{border-color:var(--red);}</span></p>
+<p class="p1"><span class="s1">.form-group input.valid-email{border-color:var(--green);background:#f6fff9;}</span></p>
+<p class="p1"><span class="s1">.form-group input.invalid-email{border-color:#e74c3c;}</span></p>
+<p class="p1"><span class="s1">.email-hint{font-size:11px;margin-top:4px;}</span></p>
+<p class="p1"><span class="s1">.dup-warn{font-size:11px;color:#e74c3c;margin-top:4px;display:none;font-weight:600;}</span></p>
+<p class="p1"><span class="s1">.student-fields{background:white;border:2px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;}</span></p>
+<p class="p1"><span class="s1">.student-block{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border);}</span></p>
+<p class="p1"><span class="s1">.student-block:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}</span></p>
+<p class="p1"><span class="s1">.student-label{font-size:13px;font-weight:700;color:var(--red);margin-bottom:10px;}</span></p>
+<p class="p1"><span class="s1">.summary{background:var(--red-light);border:2px solid var(--red-border);border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px;}</span></p>
+<p class="p1"><span class="s1">.summary-title{font-weight:700;color:var(--red);margin-bottom:8px;}</span></p>
+<p class="p1"><span class="s1">.summary-row{display:flex;justify-content:space-between;padding:3px 0;gap:10px;}</span></p>
+<p class="p1"><span class="s1">.summary-row span:first-child{color:var(--gray);flex-shrink:0;}</span></p>
+<p class="p1"><span class="s1">.summary-row span:last-child{font-weight:600;text-align:right;word-break:break-all;}</span></p>
+<p class="p1"><span class="s1">.btn{width:100%;padding:12px;background:var(--red);color:white;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Kanit',sans-serif;}</span></p>
+<p class="p1"><span class="s1">.btn:hover:not(:disabled){background:var(--red-dark);}</span></p>
+<p class="p1"><span class="s1">.btn:disabled{background:#ddd;cursor:not-allowed;color:#aaa;}</span></p>
+<p class="p1"><span class="s1">.btn.loading{background:#aaa;cursor:not-allowed;}</span></p>
+<p class="p1"><span class="s1">.success-box{background:var(--orange-light);border:2px solid var(--orange-border);border-radius:10px;padding:24px;text-align:center;display:none;}</span></p>
+<p class="p1"><span class="s1">.success-box .icon{font-size:40px;margin-bottom:10px;}</span></p>
+<p class="p1"><span class="s1">.success-box h3{color:var(--orange);font-size:18px;margin-bottom:8px;}</span></p>
+<p class="p1"><span class="s1">.success-box p{font-size:13px;color:#555;margin-bottom:4px;}</span></p>
+<p class="p1"><span class="s1">.success-note{font-size:12px;color:#7c5800;margin-top:12px;font-weight:600;background:white;border-radius:8px;padding:12px 14px;border:1.5px solid var(--orange-border);line-height:2;text-align:left;}</span></p>
+<p class="p1"><span class="s1">.booking-card{background:white;border-radius:12px;padding:16px;margin-bottom:14px;border:2px solid var(--border);}</span></p>
+<p class="p1"><span class="s1">.booking-card.pending{border-color:var(--orange-border);}</span></p>
+<p class="p1"><span class="s1">.booking-card.confirmed{border-color:#a8e6c8;background:#f6fffb;}</span></p>
+<p class="p1"><span class="s1">.booking-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:10px;}</span></p>
+<p class="p1"><span class="s1">.booking-card-title{font-weight:700;font-size:15px;}</span></p>
+<p class="p1"><span class="s1">.booking-card-detail{font-size:12px;color:var(--gray);margin-top:3px;line-height:1.7;}</span></p>
+<p class="p1"><span class="s1">.status-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0;}</span></p>
+<p class="p1"><span class="s1">.badge-pending{background:var(--orange-light);color:var(--orange);border:1.5px solid var(--orange-border);}</span></p>
+<p class="p1"><span class="s1">.badge-confirmed{background:var(--green-light);color:var(--green);border:1.5px solid #a8e6c8;}</span></p>
+<p class="p1"><span class="s1">.email-confirm-list{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}</span></p>
+<p class="p1"><span class="s1">.email-confirm-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;background:#fafafa;border:1.5px solid var(--border);flex-wrap:wrap;}</span></p>
+<p class="p1"><span class="s1">.email-confirm-row.row-confirmed{background:var(--green-light);border-color:#a8e6c8;}</span></p>
+<p class="p1"><span class="s1">.email-confirm-row.row-waiting{background:var(--orange-light);border-color:var(--orange-border);}</span></p>
+<p class="p1"><span class="s1">.ecr-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}</span></p>
+<p class="p1"><span class="s1">.ecr-dot.green{background:var(--green);}</span></p>
+<p class="p1"><span class="s1">.ecr-dot.orange{background:var(--orange);}</span></p>
+<p class="p1"><span class="s1">.ecr-info{flex:1;min-width:0;}</span></p>
+<p class="p1"><span class="s1">.ecr-email{font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}</span></p>
+<p class="p1"><span class="s1">.ecr-role{font-size:11px;color:var(--gray);margin-top:1px;}</span></p>
+<p class="p1"><span class="s1">.ecr-status{font-size:11px;font-weight:600;white-space:nowrap;}</span></p>
+<p class="p1"><span class="s1">.ecr-status.s-confirmed{color:var(--green);}</span></p>
+<p class="p1"><span class="s1">.ecr-status.s-waiting{color:var(--orange);}</span></p>
+<p class="p1"><span class="s1">.card-actions{display:flex;gap:8px;flex-wrap:wrap;}</span></p>
+<p class="p1"><span class="s1">.cancel-btn{background:none;border:2px solid #e74c3c;color:#e74c3c;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'Kanit',sans-serif;}</span></p>
+<p class="p1"><span class="s1">.cancel-btn:hover{background:#e74c3c;color:white;}</span></p>
+<p class="p1"><span class="s1">.empty-state{text-align:center;padding:40px 20px;color:#bbb;font-size:14px;line-height:2;}</span></p>
+<p class="p1"><span class="s1">.loading-state{text-align:center;padding:20px;color:var(--gray);font-size:13px;}</span></p>
+<p class="p1"><span class="s1">.divider{height:1px;background:var(--border);margin:20px 0;}</span></p>
+<p class="p1"><span class="s1">.note{font-size:12px;color:#999;line-height:1.6;}</span></p>
+<p class="p1"><span class="s1">.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:10px 20px;border-radius:8px;font-size:13px;font-family:'Kanit',sans-serif;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;max-width:90vw;}</span></p>
+<p class="p1"><span class="s1">.toast.show{opacity:1;}</span></p>
+<p class="p1"><span class="s1">.toast.green{background:var(--green);}</span></p>
+<p class="p1"><span class="s1">.toast.red{background:var(--red);}</span></p>
+<p class="p1"><span class="s1">.confirm-page{display:none;text-align:center;padding:60px 20px;}</span></p>
+<p class="p1"><span class="s1">.confirm-page .big-icon{font-size:64px;margin-bottom:20px;}</span></p>
+<p class="p1"><span class="s1">.confirm-page h2{font-size:24px;margin-bottom:10px;color:var(--red);}</span></p>
+<p class="p1"><span class="s1">.confirm-page p{font-size:14px;color:#555;line-height:1.8;margin-bottom:8px;}</span></p>
+<p class="p1"><span class="s1">.confirm-page .back-btn{display:inline-block;margin-top:20px;padding:12px 28px;background:var(--red);color:white;border-radius:8px;font-weight:700;text-decoration:none;font-family:'Kanit',sans-serif;font-size:15px;}</span></p>
+<p class="p1"><span class="s1">&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="confirm-page" id="confirmPage" style="display:none;"&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="big-icon" id="confirmIcon"&gt;⏳&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;h2 id="confirmTitle"&gt;กำลังยืนยัน...&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;p id="confirmMsg"&gt;กรุณารอสักครู่&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;a href="." class="back-btn"&gt;← กลับหน้าหลัก&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div id="mainApp"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;h2&gt;Law(รอ)จอง&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1">&lt;p class="subtitle"&gt;ระบบจองพื้นที่คอมม่อนคณะนิติศาสตร์ — จองได้ขั้นต่ำ 30 นาที สูงสุด 3 ชั่วโมง&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">&lt;div class="tabs"&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="tab active" onclick="showTab('book')"&gt;จองพื้นที่&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="tab" onclick="showTab('mybooking')"&gt;การจองของฉัน&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="tab" onclick="showTab('status')"&gt;ตารางว่าง&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div id="tab-book"&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="section-title"&gt;1. เลือกพื้นที่&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="rooms"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="room-card" onclick="selectRoom(this,'ห้องประชุม 1')"&gt;&lt;div class="room-name"&gt;ห้องประชุม 1&lt;/div&gt;&lt;div class="room-detail"&gt;ห้องประชุม · กลุ่มใหญ่&lt;/div&gt;&lt;div class="room-status status-available"&gt;● ว่าง&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="room-card" onclick="selectRoom(this,'ห้องประชุม 2')"&gt;&lt;div class="room-name"&gt;ห้องประชุม 2&lt;/div&gt;&lt;div class="room-detail"&gt;ห้องประชุม · กลุ่มเล็ก&lt;/div&gt;&lt;div class="room-status status-available"&gt;● ว่าง&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="room-card" onclick="selectRoom(this,'ห้องประชุม 3')"&gt;&lt;div class="room-name"&gt;ห้องประชุม 3&lt;/div&gt;&lt;div class="room-detail"&gt;ห้องประชุม · กลุ่มเล็ก&lt;/div&gt;&lt;div class="room-status status-available"&gt;● ว่าง&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="room-card" onclick="selectRoom(this,'ห้องประชุม 4')"&gt;&lt;div class="room-name"&gt;ห้องประชุม 4&lt;/div&gt;&lt;div class="room-detail"&gt;ห้องประชุม · กลุ่มเล็ก&lt;/div&gt;&lt;div class="room-status status-available"&gt;● ว่าง&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="room-card" onclick="selectRoom(this,'ห้องประชุม 5')"&gt;&lt;div class="room-name"&gt;ห้องประชุม 5&lt;/div&gt;&lt;div class="room-detail"&gt;ห้องประชุม · กลุ่มเล็ก&lt;/div&gt;&lt;div class="room-status status-available"&gt;● ว่าง&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="room-card" onclick="selectRoom(this,'ห้องประชุม 6')"&gt;&lt;div class="room-name"&gt;ห้องประชุม 6&lt;/div&gt;&lt;div class="room-detail"&gt;ห้องประชุม · กลุ่มเล็ก&lt;/div&gt;&lt;div class="room-status status-available"&gt;● ว่าง&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="section-title"&gt;2. เลือกวันที่&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="date-row" id="dateRow"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="section-title"&gt;3. เลือกเวลา (ขั้นต่ำ 30 นาที · สูงสุด 3 ชั่วโมง)&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="time-picker-box"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="time-picker-row"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;label&gt;เริ่ม&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="time-select-group"&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;select id="startHour" onchange="onTimeChange()"&gt;&lt;/select&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;span&gt;:&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;select id="startMin" onchange="onTimeChange()"&gt;&lt;option value="0"&gt;00&lt;/option&gt;&lt;option value="30"&gt;30&lt;/option&gt;&lt;/select&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="time-picker-row"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;label&gt;สิ้นสุด&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="time-select-group"&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;select id="endHour" onchange="onTimeChange()"&gt;&lt;/select&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;span&gt;:&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1">        &lt;select id="endMin" onchange="onTimeChange()"&gt;&lt;option value="0"&gt;00&lt;/option&gt;&lt;option value="30"&gt;30&lt;/option&gt;&lt;/select&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="time-picker-row"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;label&gt;ระยะเวลา&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="time-duration-display" id="durationDisplay"&gt;— นาที&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="conflict-warn" id="conflictWarn"&gt;⚠️ ช่วงเวลานี้ทับซ้อนกับการจองที่มีอยู่&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;p class="time-hint"&gt;⏰ รับจองตั้งแต่ 08:00 ถึง 02:00 น.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="divider"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="section-title"&gt;4. กรอกอีเมลผู้จอง (3 คน)&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;p class="note" style="margin-bottom:6px;"&gt;ใช้ได้เฉพาะอีเมล &lt;b&gt;@dome.tu.ac.th&lt;/b&gt; เท่านั้น · ต้องยืนยันครบ 3 คนภายใน 2 ชั่วโมง · &lt;b style="color:#e74c3c;"&gt;ห้ามใช้อีเมลซ้ำกัน&lt;/b&gt;&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div id="emailSendNotice" style="display:none;background:#e8f4ff;border:1.5px solid #90cdf4;border-radius:8px;padding:10px 14px;font-size:13px;color:#1a5276;margin-bottom:14px;font-weight:600;"&gt;📅 อีเมลยืนยันจะถูกส่งในวันที่ &lt;span id="emailSendDate"&gt;—&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="student-fields"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="student-block"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="student-label"&gt;👤 ผู้จองหลัก&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="form-group"&gt;&lt;label&gt;อีเมล&lt;/label&gt;&lt;input type="email" id="email1" placeholder="student@dome.tu.ac.th" oninput="onEmailInput(1)"&gt;&lt;div class="email-hint" id="hint1"&gt;&lt;/div&gt;&lt;div class="dup-warn" id="dup1"&gt;⚠️ อีเมลซ้ำกับผู้ร่วมจองคนอื่น&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="student-block"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="student-label"&gt;👤 ผู้ร่วมจอง คนที่ 2&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="form-group"&gt;&lt;label&gt;อีเมล&lt;/label&gt;&lt;input type="email" id="email2" placeholder="student@dome.tu.ac.th" oninput="onEmailInput(2)"&gt;&lt;div class="email-hint" id="hint2"&gt;&lt;/div&gt;&lt;div class="dup-warn" id="dup2"&gt;⚠️ อีเมลซ้ำกับผู้ร่วมจองคนอื่น&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="student-block"&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="student-label"&gt;👤 ผู้ร่วมจอง คนที่ 3&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">      &lt;div class="form-group"&gt;&lt;label&gt;อีเมล&lt;/label&gt;&lt;input type="email" id="email3" placeholder="student@dome.tu.ac.th" oninput="onEmailInput(3)"&gt;&lt;div class="email-hint" id="hint3"&gt;&lt;/div&gt;&lt;div class="dup-warn" id="dup3"&gt;⚠️ อีเมลซ้ำกับผู้ร่วมจองคนอื่น&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="summary" id="summary" style="display:none;"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="summary-title"&gt;สรุปการจอง&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="summary-row"&gt;&lt;span&gt;พื้นที่&lt;/span&gt;&lt;span id="sum-room"&gt;—&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="summary-row"&gt;&lt;span&gt;วันที่จอง&lt;/span&gt;&lt;span id="sum-date"&gt;—&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="summary-row"&gt;&lt;span&gt;เวลา&lt;/span&gt;&lt;span id="sum-slot"&gt;—&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="summary-row"&gt;&lt;span&gt;ระยะเวลา&lt;/span&gt;&lt;span id="sum-duration"&gt;—&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="summary-row" style="background:#e8f4ff;border-radius:6px;padding:6px 8px;margin:4px 0;"&gt;&lt;span style="color:#1a5276;font-weight:700;"&gt;📅 ส่งอีเมลวันที่&lt;/span&gt;&lt;span id="sum-senddate" style="color:#1a5276;font-weight:700;"&gt;—&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="summary-row"&gt;&lt;span&gt;อีเมล 1&lt;/span&gt;&lt;span id="sum-e1"&gt;—&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="summary-row"&gt;&lt;span&gt;อีเมล 2&lt;/span&gt;&lt;span id="sum-e2"&gt;—&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="summary-row"&gt;&lt;span&gt;อีเมล 3&lt;/span&gt;&lt;span id="sum-e3"&gt;—&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;button class="btn" onclick="submitBooking()" id="submitBtn" disabled&gt;ส่งคำขอจอง + ส่งอีเมลยืนยัน →&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="success-box" id="successBox"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="icon"&gt;📧&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;h3&gt;ส่งอีเมลยืนยันแล้ว!&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;p id="successLine1"&gt;&lt;/p&gt;&lt;p id="successLine2"&gt;&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;div class="success-note"&gt;📬 ส่งลิงก์ยืนยันไปที่&lt;br&gt;&lt;span id="successEmails" style="font-weight:400;"&gt;&lt;/span&gt;&lt;br&gt;&lt;br&gt;⏰ ทั้ง 3 คนต้องกดยืนยันในอีเมลภายใน &lt;b&gt;2 ชั่วโมง&lt;/b&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;br&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;button class="btn" onclick="showTab('mybooking')" style="max-width:240px;margin:0 auto 10px;"&gt;ดูสถานะ "การจองของฉัน" →&lt;/button&gt;&lt;br&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;button class="btn" onclick="resetForm()" style="max-width:130px;margin:0 auto;background:#eee;color:#666;font-size:13px;"&gt;จองใหม่&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div id="tab-mybooking" style="display:none;"&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="section-title"&gt;การจองของฉัน&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;p class="note" style="margin-bottom:12px;"&gt;กรอกอีเมลที่ใช้จองเพื่อดูสถานะ&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div style="display:flex;gap:8px;margin-bottom:16px;"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;input type="email" id="searchEmail" placeholder="กรอกอีเมลที่ใช้จอง" style="flex:1;padding:10px 14px;border-radius:8px;border:2px solid var(--border);font-size:13px;font-family:'Kanit',sans-serif;outline:none;"&gt;</span></p>
+<p class="p1"><span class="s1">    &lt;button class="btn" onclick="searchMyBookings()" style="max-width:100px;font-size:13px;padding:10px;"&gt;🔍 ค้นหา&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div id="myBookingList"&gt;&lt;div class="empty-state"&gt;กรอกอีเมลเพื่อดูการจอง&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div id="tab-status" style="display:none;"&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div class="section-title"&gt;ตารางว่าง/ไม่ว่าง — อาทิตย์นี้&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;!-- Week day tabs --&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div id="weekDayTabs" style="display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;div id="statusTable"&gt;&lt;div class="loading-state"&gt;⏳ กำลังโหลด...&lt;/div&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">  &lt;p class="note" style="margin-top:12px;"&gt;🟢 ว่าง &amp;nbsp;·&amp;nbsp; 🟡 รอยืนยัน &amp;nbsp;·&amp;nbsp; 🔴 จองแล้ว&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;div class="toast" id="toast"&gt;&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script&gt;</span></p>
+<p class="p1"><span class="s1">const API='https://script.google.com/macros/s/AKfycbzm3D2klyrc19dVBk4w6jVLjE68bvqxjztEc7hXxTV-n-rFQfbMvI849bRxJar7-oQG2Q/exec';</span></p>
+<p class="p1"><span class="s1">const EJS_SERVICE='service_lawforward',EJS_TEMPLATE='template_50orqck',EJS_PUBLIC='eMTRY9jv--i1hwgzm';</span></p>
+<p class="p1"><span class="s1">emailjs.init(EJS_PUBLIC);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">let selectedRoom='',selectedDate='';</span></p>
+<p class="p1"><span class="s1">let cache=[];</span></p>
+<p class="p1"><span class="s1">const CONFIRM_MS=2*60*60*1000;</span></p>
+<p class="p1"><span class="s1">const ROLES=['ผู้จองหลัก','ผู้ร่วมจอง คนที่ 2','ผู้ร่วมจอง คนที่ 3'];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function toMins(h,m){return h*60+m;}</span></p>
+<p class="p1"><span class="s1">function minsToStr(m){if(m&gt;=1440)m-=1440;return String(Math.floor(m/60)%24).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}</span></p>
+<p class="p1"><span class="s1">function getTime(){</span></p>
+<p class="p1"><span class="s1">  const sh=parseInt(document.getElementById('startHour').value),sm=parseInt(document.getElementById('startMin').value);</span></p>
+<p class="p1"><span class="s1">  const eh=parseInt(document.getElementById('endHour').value),em=parseInt(document.getElementById('endMin').value);</span></p>
+<p class="p1"><span class="s1">  let s=toMins(sh,sm),e=toMins(eh,em);if(e&lt;=s)e+=1440;return{startMins:s,endMins:e};</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">function durStr(d){const h=Math.floor(d/60),m=d%60;return[(h?h+' ชั่วโมง':''),(m?m+' นาที':'')].filter(Boolean).join(' ');}</span></p>
+<p class="p1"><span class="s1">function validEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}</span></p>
+<p class="p1"><span class="s1">function isDone(b){return(b.confirmedBy||[]).length&gt;=3;}</span></p>
+<p class="p1"><span class="s1">function mkToken(){return Math.random().toString(36).slice(2)+Date.now().toString(36);}</span></p>
+<p class="p1"><span class="s1">function hasConflict(r,d,s,e){return cache.some(b=&gt;normalizeDate(b.date)===d&amp;&amp;b.room===r&amp;&amp;s&lt;b.endMins&amp;&amp;e&gt;b.startMins);}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function toast(msg,type,ms){</span></p>
+<p class="p1"><span class="s1">  const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(type?' '+type:'');</span></p>
+<p class="p1"><span class="s1">  clearTimeout(t._t);t._t=setTimeout(()=&gt;t.className='toast',ms||3000);</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">async function apiGet(p){</span></p>
+<p class="p1"><span class="s1">  const r=await fetch(API+'?'+new URLSearchParams(p));return r.json();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">async function apiPost(d){</span></p>
+<p class="p1"><span class="s1">  const r=await fetch(API,{method:'POST',body:JSON.stringify(d)});return r.json();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">// ✅ CONFIRM — calls real API, works across all devices</span></p>
+<p class="p1"><span class="s1">async function handleUrlToken(){</span></p>
+<p class="p1"><span class="s1">  const p=new URLSearchParams(window.location.search);</span></p>
+<p class="p1"><span class="s1">  const tk=p.get('confirm');</span></p>
+<p class="p1"><span class="s1">  // ✅ ถ้าไม่มี token ใน URL ให้แสดง main app ปกติ</span></p>
+<p class="p1"><span class="s1">  if(!tk||tk.trim()===''){</span></p>
+<p class="p1"><span class="s1">    document.getElementById('mainApp').style.display='block';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('confirmPage').style.display='none';</span></p>
+<p class="p1"><span class="s1">    return;</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">  // มี token — แสดงหน้ายืนยัน</span></p>
+<p class="p1"><span class="s1">  document.getElementById('mainApp').style.display='none';</span></p>
+<p class="p1"><span class="s1">  document.getElementById('confirmPage').style.display='block';</span></p>
+<p class="p1"><span class="s1">  try{</span></p>
+<p class="p1"><span class="s1">    const res=await apiGet({action:'confirm',token:tk});</span></p>
+<p class="p1"><span class="s1">    const s=res.status||'notfound';</span></p>
+<p class="p1"><span class="s1">    const icons={ok:'✅',already:'✅',already_done:'✅',expired:'⏰',notfound:'❌'};</span></p>
+<p class="p1"><span class="s1">    const titles={ok:'ยืนยันสำเร็จ! 🎉',already:'ยืนยันไปแล้ว',already_done:'การจองครบแล้ว',expired:'ลิงก์หมดอายุ',notfound:'ลิงก์ไม่ถูกต้อง'};</span></p>
+<p class="p1"><span class="s1">    const msgs={</span></p>
+<p class="p1"><span class="s1">      ok:'&lt;b&gt;'+res.info+'&lt;/b&gt;&lt;br&gt;&lt;br&gt;✅ ยืนยันแล้ว '+(res.confirmedCount||'?')+'/3 คน&lt;br&gt;'+(res.isDone?'🎉 ครบแล้ว! การจองมีผลสมบูรณ์':'รอให้ครบ 3 คนก่อน'),</span></p>
+<p class="p1"><span class="s1">      already:'คุณยืนยันไปแล้ว&lt;br&gt;&lt;b&gt;'+(res.info||'')+'&lt;/b&gt;',</span></p>
+<p class="p1"><span class="s1">      already_done:'การจองนี้ยืนยันครบแล้ว&lt;br&gt;&lt;b&gt;'+(res.info||'')+'&lt;/b&gt;',</span></p>
+<p class="p1"><span class="s1">      expired:'ลิงก์หมดอายุแล้ว (เกิน 2 ชั่วโมง)&lt;br&gt;กรุณาขอให้ผู้จองหลักจองใหม่',</span></p>
+<p class="p1"><span class="s1">      notfound:'ไม่พบข้อมูลการจองนี้&lt;br&gt;ลิงก์อาจหมดอายุแล้ว'</span></p>
+<p class="p1"><span class="s1">    };</span></p>
+<p class="p1"><span class="s1">    document.getElementById('confirmIcon').textContent=icons[s]||'❌';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('confirmTitle').textContent=titles[s]||'เกิดข้อผิดพลาด';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('confirmMsg').innerHTML=msgs[s]||'กรุณาลองใหม่';</span></p>
+<p class="p1"><span class="s1">  }catch(e){</span></p>
+<p class="p1"><span class="s1">    document.getElementById('confirmIcon').textContent='❌';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('confirmTitle').textContent='เชื่อมต่อไม่ได้';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('confirmMsg').textContent='กรุณาลองใหม่อีกครั้ง';</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function populateHours(){</span></p>
+<p class="p1"><span class="s1">  [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,0,1,2].forEach(h=&gt;{</span></p>
+<p class="p1"><span class="s1">    ['startHour','endHour'].forEach(id=&gt;{</span></p>
+<p class="p1"><span class="s1">      const o=document.createElement('option');o.value=h;o.textContent=String(h).padStart(2,'0');</span></p>
+<p class="p1"><span class="s1">      document.getElementById(id).appendChild(o);</span></p>
+<p class="p1"><span class="s1">    });</span></p>
+<p class="p1"><span class="s1">  });</span></p>
+<p class="p1"><span class="s1">  document.getElementById('startHour').value=9;document.getElementById('endHour').value=10;onTimeChange();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function generateDates(){</span></p>
+<p class="p1"><span class="s1">  const row=document.getElementById('dateRow');</span></p>
+<p class="p1"><span class="s1">  const days=['อา','จ','อ','พ','พฤ','ศ','ส'];</span></p>
+<p class="p1"><span class="s1">  const today=new Date();</span></p>
+<p class="p1"><span class="s1">  for(let i=0;i&lt;7;i++){</span></p>
+<p class="p1"><span class="s1">    const d=new Date(today);d.setDate(today.getDate()+i);</span></p>
+<p class="p1"><span class="s1">    const btn=document.createElement('div');btn.className='date-btn'+(i===0?' active':'');</span></p>
+<p class="p1"><span class="s1">    btn.innerHTML='&lt;div class="day-name"&gt;'+days[d.getDay()]+'&lt;/div&gt;&lt;div class="day-num"&gt;'+d.getDate()+'&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">    const ds=d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();</span></p>
+<p class="p1"><span class="s1">    btn.onclick=()=&gt;{document.querySelectorAll('.date-btn').forEach(b=&gt;b.classList.remove('active'));btn.classList.add('active');selectedDate=ds;onTimeChange();updateSummary();loadStatus();};</span></p>
+<p class="p1"><span class="s1">    if(i===0)selectedDate=ds;row.appendChild(btn);</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function selectRoom(el,name){</span></p>
+<p class="p1"><span class="s1">  document.querySelectorAll('.room-card').forEach(c=&gt;c.classList.remove('selected'));</span></p>
+<p class="p1"><span class="s1">  el.classList.add('selected');selectedRoom=name;onTimeChange();updateSummary();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function onTimeChange(){</span></p>
+<p class="p1"><span class="s1">  const t=getTime(),dur=t.endMins-t.startMins;</span></p>
+<p class="p1"><span class="s1">  const d=document.getElementById('durationDisplay'),w=document.getElementById('conflictWarn');</span></p>
+<p class="p1"><span class="s1">  if(dur&lt;=0){d.textContent='กรุณาเลือกเวลาสิ้นสุดหลังเวลาเริ่ม';d.className='time-duration-display invalid';w.style.display='none';updateSubmitBtn();return;}</span></p>
+<p class="p1"><span class="s1">  if(dur&lt;30){d.textContent=dur+' นาที — ต้องจองอย่างน้อย 30 นาที';d.className='time-duration-display invalid';w.style.display='none';updateSubmitBtn();return;}</span></p>
+<p class="p1"><span class="s1">  if(dur&gt;180){d.textContent=dur+' นาที — เกิน 3 ชั่วโมง';d.className='time-duration-display invalid';w.style.display='none';updateSubmitBtn();return;}</span></p>
+<p class="p1"><span class="s1">  d.textContent=durStr(dur);d.className='time-duration-display valid';</span></p>
+<p class="p1"><span class="s1">  // ✅ แสดงรายละเอียดการจองที่ทับซ้อน</span></p>
+<p class="p1"><span class="s1">  if(selectedRoom){</span></p>
+<p class="p1"><span class="s1">    const conflict=cache.find(b=&gt;normalizeDate(b.date)===selectedDate&amp;&amp;b.room===selectedRoom&amp;&amp;t.startMins&lt;b.endMins&amp;&amp;t.endMins&gt;b.startMins);</span></p>
+<p class="p1"><span class="s1">    if(conflict){</span></p>
+<p class="p1"><span class="s1">      const status=isDone(conflict)?'🔴 จองแล้ว':'🟡 รอยืนยัน';</span></p>
+<p class="p1"><span class="s1">      w.textContent='⚠️ ทับซ้อนกับ '+status+' เวลา '+conflict.slot+' — กรุณาเลือกเวลาอื่น';</span></p>
+<p class="p1"><span class="s1">      w.style.display='block';</span></p>
+<p class="p1"><span class="s1">    } else {w.style.display='none';}</span></p>
+<p class="p1"><span class="s1">  } else {w.style.display='none';}</span></p>
+<p class="p1"><span class="s1">  updateSummary();updateSubmitBtn();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">function timeValid(){</span></p>
+<p class="p1"><span class="s1">  const t=getTime(),d=t.endMins-t.startMins;</span></p>
+<p class="p1"><span class="s1">  if(d&lt;30||d&gt;180)return false;</span></p>
+<p class="p1"><span class="s1">  // ✅ ล็อกถ้าทับซ้อน normalize date ด้วย</span></p>
+<p class="p1"><span class="s1">  if(selectedRoom&amp;&amp;cache.find(b=&gt;normalizeDate(b.date)===selectedDate&amp;&amp;b.room===selectedRoom&amp;&amp;t.startMins&lt;b.endMins&amp;&amp;t.endMins&gt;b.startMins))return false;</span></p>
+<p class="p1"><span class="s1">  return true;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">function hasDups(){const e=[1,2,3].map(i=&gt;document.getElementById('email'+i).value.trim().toLowerCase()).filter(x=&gt;validEmail(x));return new Set(e).size!==e.length;}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function onEmailInput(n){</span></p>
+<p class="p1"><span class="s1">  const v=document.getElementById('email'+n).value.trim();</span></p>
+<p class="p1"><span class="s1">  const h=document.getElementById('hint'+n),inp=document.getElementById('email'+n);</span></p>
+<p class="p1"><span class="s1">  if(!v){inp.className='';h.textContent='';h.style.color='';}</span></p>
+<p class="p1"><span class="s1">  else if(!validEmail(v)){inp.className='invalid-email';h.textContent='อีเมลไม่ถูกต้อง';h.style.color='#e74c3c';}</span></p>
+<p class="p1"><span class="s1">  else if(!v.toLowerCase().endsWith('@dome.tu.ac.th')){</span></p>
+<p class="p1"><span class="s1">    inp.className='invalid-email';</span></p>
+<p class="p1"><span class="s1">    h.textContent='⚠️ ใช้ได้เฉพาะอีเมล @dome.tu.ac.th เท่านั้น';</span></p>
+<p class="p1"><span class="s1">    h.style.color='#e74c3c';</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">  else{inp.className='valid-email';h.textContent='✓ ถูกต้อง';h.style.color='var(--green)';}</span></p>
+<p class="p1"><span class="s1">  const all=[1,2,3].map(i=&gt;document.getElementById('email'+i).value.trim().toLowerCase());</span></p>
+<p class="p1"><span class="s1">  [1,2,3].forEach(i=&gt;{</span></p>
+<p class="p1"><span class="s1">    const dup=document.getElementById('dup'+i),val=all[i-1];</span></p>
+<p class="p1"><span class="s1">    if(!val||!validEmail(val)){dup.style.display='none';return;}</span></p>
+<p class="p1"><span class="s1">    const d=all.filter((_,j)=&gt;j!==i-1).includes(val);</span></p>
+<p class="p1"><span class="s1">    dup.style.display=d?'block':'none';</span></p>
+<p class="p1"><span class="s1">    if(d)document.getElementById('email'+i).className='invalid-email';</span></p>
+<p class="p1"><span class="s1">  });</span></p>
+<p class="p1"><span class="s1">  updateSummary();updateSubmitBtn();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">// คืนวันที่ปัจจุบันในรูปแบบ d/m/yyyy</span></p>
+<p class="p1"><span class="s1">function todayStr(){</span></p>
+<p class="p1"><span class="s1">  const d=new Date();return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">// เปรียบเทียบว่าวันที่จองเป็นวันนี้หรือไม่</span></p>
+<p class="p1"><span class="s1">function isToday(dateStr){return dateStr===todayStr();}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function updateSummary(){</span></p>
+<p class="p1"><span class="s1">  const t=getTime(),dur=t.endMins-t.startMins,s=document.getElementById('summary');</span></p>
+<p class="p1"><span class="s1">  if(selectedRoom){</span></p>
+<p class="p1"><span class="s1">    s.style.display='block';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('sum-room').textContent=selectedRoom;</span></p>
+<p class="p1"><span class="s1">    document.getElementById('sum-date').textContent=selectedDate||'—';</span></p>
+<p class="p1"><span class="s1">    if(dur&gt;=30&amp;&amp;dur&lt;=180){document.getElementById('sum-slot').textContent=minsToStr(t.startMins)+' – '+minsToStr(t.endMins);document.getElementById('sum-duration').textContent=durStr(dur);}</span></p>
+<p class="p1"><span class="s1">    else{document.getElementById('sum-slot').textContent='—';document.getElementById('sum-duration').textContent='—';}</span></p>
+<p class="p1"><span class="s1">    // แสดงวันที่ส่งอีเมล</span></p>
+<p class="p1"><span class="s1">    const sendDate=selectedDate||'—';</span></p>
+<p class="p1"><span class="s1">    const isNow=isToday(selectedDate);</span></p>
+<p class="p1"><span class="s1">    document.getElementById('sum-senddate').textContent=sendDate+(isNow?' (วันนี้)':' (วันที่จอง)');</span></p>
+<p class="p1"><span class="s1">    // แสดง notice บนฟอร์ม</span></p>
+<p class="p1"><span class="s1">    const notice=document.getElementById('emailSendNotice');</span></p>
+<p class="p1"><span class="s1">    const noticeDate=document.getElementById('emailSendDate');</span></p>
+<p class="p1"><span class="s1">    if(selectedDate){notice.style.display='block';noticeDate.textContent=sendDate+(isNow?' (วันนี้ ส่งทันที)':' — อีเมลจะถูกส่งในวันนั้น');}</span></p>
+<p class="p1"><span class="s1">    else{notice.style.display='none';}</span></p>
+<p class="p1"><span class="s1">    [1,2,3].forEach(i=&gt;document.getElementById('sum-e'+i).textContent=document.getElementById('email'+i).value.trim()||'—');</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function validTUEmail(e){return validEmail(e)&amp;&amp;e.toLowerCase().endsWith('@dome.tu.ac.th');}</span></p>
+<p class="p1"><span class="s1">function updateSubmitBtn(){</span></p>
+<p class="p1"><span class="s1">  const e=[1,2,3].map(i=&gt;document.getElementById('email'+i).value.trim());</span></p>
+<p class="p1"><span class="s1">  const isNow=isToday(selectedDate);</span></p>
+<p class="p1"><span class="s1">  const btn=document.getElementById('submitBtn');</span></p>
+<p class="p1"><span class="s1">  btn.textContent=isNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';</span></p>
+<p class="p1"><span class="s1">  btn.disabled=!(selectedRoom&amp;&amp;timeValid()&amp;&amp;e.every(validTUEmail)&amp;&amp;!hasDups());</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">async function submitBooking(){</span></p>
+<p class="p1"><span class="s1">  const t=getTime(),emails=[1,2,3].map(i=&gt;document.getElementById('email'+i).value.trim());</span></p>
+<p class="p1"><span class="s1">  const dur=t.endMins-t.startMins,slot=minsToStr(t.startMins)+' – '+minsToStr(t.endMins);</span></p>
+<p class="p1"><span class="s1">  const tokens=[mkToken(),mkToken(),mkToken()];</span></p>
+<p class="p1"><span class="s1">  const id=Date.now().toString();</span></p>
+<p class="p1"><span class="s1">  const base=window.location.origin+window.location.pathname;</span></p>
+<p class="p1"><span class="s1">  const sendNow=isToday(selectedDate);</span></p>
+<p class="p1"><span class="s1">  const booking={id,emails,tokens,room:selectedRoom,date:selectedDate,slot,startMins:t.startMins,endMins:t.endMins,durLabel:durStr(dur),confirmedBy:[],emailScheduled:!sendNow};</span></p>
+<p class="p1"><span class="s1">  const btn=document.getElementById('submitBtn');</span></p>
+<p class="p1"><span class="s1">  btn.disabled=true;btn.classList.add('loading');btn.textContent='💾 กำลังบันทึก...';</span></p>
+<p class="p1"><span class="s1">  try{</span></p>
+<p class="p1"><span class="s1">    await apiPost({action:'addBooking',booking});</span></p>
+<p class="p1"><span class="s1">    cache.push(booking);</span></p>
+<p class="p1"><span class="s1">  }catch(e){</span></p>
+<p class="p1"><span class="s1">    toast('❌ บันทึกไม่สำเร็จ ลองใหม่','red',4000);</span></p>
+<p class="p1"><span class="s1">    btn.disabled=false;btn.classList.remove('loading');</span></p>
+<p class="p1"><span class="s1">    btn.textContent=sendNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';</span></p>
+<p class="p1"><span class="s1">    return;</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  let sent=0,sentFlags=[false,false,false];</span></p>
+<p class="p1"><span class="s1">  if(sendNow){</span></p>
+<p class="p1"><span class="s1">    // ส่งอีเมลทันทีถ้าเป็นวันนี้</span></p>
+<p class="p1"><span class="s1">    btn.textContent='📧 กำลังส่งอีเมล...';</span></p>
+<p class="p1"><span class="s1">    for(let i=0;i&lt;3;i++){</span></p>
+<p class="p1"><span class="s1">      try{</span></p>
+<p class="p1"><span class="s1">        await emailjs.send(EJS_SERVICE,EJS_TEMPLATE,{to_email:emails[i],student_role:ROLES[i],room:selectedRoom,date:selectedDate,slot,duration:durStr(dur),all_students:emails.join(', '),confirm_url:base+'?confirm='+tokens[i],from_name:'Law(รอ)จอง'});</span></p>
+<p class="p1"><span class="s1">        sentFlags[i]=true;sent++;</span></p>
+<p class="p1"><span class="s1">      }catch(e){console.error(e);}</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  btn.classList.remove('loading');</span></p>
+<p class="p1"><span class="s1">  btn.textContent=sendNow?'ส่งคำขอจอง + ส่งอีเมลทันที →':'บันทึกการจอง (ส่งอีเมล '+selectedDate+') →';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  document.getElementById('successLine1').textContent='📍 '+selectedRoom+' · 📅 '+selectedDate;</span></p>
+<p class="p1"><span class="s1">  document.getElementById('successLine2').textContent='⏰ '+slot+' ('+durStr(dur)+')';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  if(sendNow){</span></p>
+<p class="p1"><span class="s1">    document.getElementById('successBox').querySelector('h3').textContent='ส่งอีเมลยืนยันแล้ว!';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('successBox').querySelector('.icon').textContent='📧';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('successEmails').innerHTML=emails.map((e,i)=&gt;(sentFlags[i]?'✅ ':'❌ ')+e).join('&lt;br&gt;');</span></p>
+<p class="p1"><span class="s1">    document.getElementById('successBox').querySelector('.success-note').innerHTML='📬 ส่งลิงก์ยืนยันไปที่&lt;br&gt;&lt;span style="font-weight:400;"&gt;'+emails.join('&lt;br&gt;')+'&lt;/span&gt;&lt;br&gt;&lt;br&gt;⏰ ทั้ง 3 คนต้องกดยืนยันในอีเมลภายใน &lt;b&gt;2 ชั่วโมง&lt;/b&gt;';</span></p>
+<p class="p1"><span class="s1">    toast(sent===3?'✅ ส่งอีเมลครบ 3 คนแล้ว!':'⚠️ ส่งอีเมลได้ '+sent+'/3',sent===3?'green':'red');</span></p>
+<p class="p1"><span class="s1">  } else {</span></p>
+<p class="p1"><span class="s1">    document.getElementById('successBox').querySelector('h3').textContent='บันทึกการจองแล้ว!';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('successBox').querySelector('.icon').textContent='📅';</span></p>
+<p class="p1"><span class="s1">    document.getElementById('successEmails').innerHTML=emails.join('&lt;br&gt;');</span></p>
+<p class="p1"><span class="s1">    document.getElementById('successBox').querySelector('.success-note').innerHTML='📅 อีเมลยืนยันจะถูกส่งในวันที่ &lt;b&gt;'+selectedDate+'&lt;/b&gt;&lt;br&gt;&lt;br&gt;📬 จะส่งไปที่&lt;br&gt;&lt;span style="font-weight:400;"&gt;'+emails.join('&lt;br&gt;')+'&lt;/span&gt;&lt;br&gt;&lt;br&gt;⏰ เมื่อได้รับอีเมลแล้ว ต้องยืนยันครบ 3 คนภายใน &lt;b&gt;2 ชั่วโมง&lt;/b&gt;';</span></p>
+<p class="p1"><span class="s1">    toast('✅ บันทึกแล้ว! อีเมลจะส่งวันที่ '+selectedDate,'green');</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  document.getElementById('successBox').style.display='block';</span></p>
+<p class="p1"><span class="s1">  document.getElementById('submitBtn').style.display='none';</span></p>
+<p class="p1"><span class="s1">  document.getElementById('summary').style.display='none';</span></p>
+<p class="p1"><span class="s1">  document.getElementById('emailSendNotice').style.display='none';</span></p>
+<p class="p1"><span class="s1">  loadStatus();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function resetForm(){</span></p>
+<p class="p1"><span class="s1">  selectedRoom='';document.querySelectorAll('.room-card').forEach(c=&gt;c.classList.remove('selected'));</span></p>
+<p class="p1"><span class="s1">  [1,2,3].forEach(i=&gt;{document.getElementById('email'+i).value='';document.getElementById('email'+i).className='';document.getElementById('hint'+i).textContent='';document.getElementById('dup'+i).style.display='none';});</span></p>
+<p class="p1"><span class="s1">  document.getElementById('successBox').style.display='none';document.getElementById('submitBtn').style.display='block';document.getElementById('submitBtn').disabled=true;</span></p>
+<p class="p1"><span class="s1">  document.getElementById('summary').style.display='none';</span></p>
+<p class="p1"><span class="s1">  document.getElementById('emailSendNotice').style.display='none';</span></p>
+<p class="p1"><span class="s1">  document.getElementById('submitBtn').textContent='ส่งคำขอจอง + ส่งอีเมลยืนยัน →';</span></p>
+<p class="p1"><span class="s1">  document.getElementById('startHour').value=9;document.getElementById('startMin').value=0;document.getElementById('endHour').value=10;document.getElementById('endMin').value=0;onTimeChange();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">async function cancelBooking(id){</span></p>
+<p class="p1"><span class="s1">  const searchEmail=document.getElementById('searchEmail').value.trim().toLowerCase();</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  // ✅ ถ้า allWeekBookings ว่าง ให้โหลดใหม่ก่อน</span></p>
+<p class="p1"><span class="s1">  if(!allWeekBookings.length){</span></p>
+<p class="p1"><span class="s1">    try{const res=await apiGet({action:'getBookings'});allWeekBookings=res.bookings||[];}</span></p>
+<p class="p1"><span class="s1">    catch(e){toast('❌ โหลดข้อมูลไม่สำเร็จ','red');return;}</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  const booking=allWeekBookings.find(b=&gt;b.id.toString()===id.toString());</span></p>
+<p class="p1"><span class="s1">  if(!booking){toast('❌ ไม่พบการจองนี้','red');return;}</span></p>
+<p class="p1"><span class="s1">  if(!booking.emails.map(e=&gt;e.toLowerCase()).includes(searchEmail)){</span></p>
+<p class="p1"><span class="s1">    toast('❌ คุณไม่มีสิทธิ์ยกเลิกการจองของคนอื่น','red',4000);return;</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">  if(!confirm('ยืนยันยกเลิกการจอง?\n📍 '+booking.room+' · '+booking.date+' · '+booking.slot))return;</span></p>
+<p class="p1"><span class="s1">  try{</span></p>
+<p class="p1"><span class="s1">    await apiPost({action:'cancelBooking',id});</span></p>
+<p class="p1"><span class="s1">    allWeekBookings=allWeekBookings.filter(b=&gt;b.id.toString()!==id.toString());</span></p>
+<p class="p1"><span class="s1">    cache=cache.filter(b=&gt;b.id.toString()!==id.toString());</span></p>
+<p class="p1"><span class="s1">    toast('✅ ยกเลิกแล้ว','green');</span></p>
+<p class="p1"><span class="s1">    await searchMyBookings();</span></p>
+<p class="p1"><span class="s1">    renderStatusForDate(statusViewDate||todayStr());</span></p>
+<p class="p1"><span class="s1">  }catch(e){toast('❌ ยกเลิกไม่สำเร็จ','red');}</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">async function searchMyBookings(){</span></p>
+<p class="p1"><span class="s1">  const email=document.getElementById('searchEmail').value.trim().toLowerCase();</span></p>
+<p class="p1"><span class="s1">  // ✅ ค้นหาได้ด้วยอีเมลใดก็ได้ ไม่บังคับ domain</span></p>
+<p class="p1"><span class="s1">  if(!validEmail(email)){toast('กรุณากรอกอีเมลให้ถูกต้อง','red');return;}</span></p>
+<p class="p1"><span class="s1">  document.getElementById('myBookingList').innerHTML='&lt;div class="loading-state"&gt;⏳ กำลังค้นหา...&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">  try{</span></p>
+<p class="p1"><span class="s1">    // ✅ โหลดข้อมูลใหม่ทุกครั้ง ไม่ filter ด้วย date เพื่อให้ได้ข้อมูลครบ</span></p>
+<p class="p1"><span class="s1">    const res=await apiGet({action:'getBookings'});</span></p>
+<p class="p1"><span class="s1">    allWeekBookings=res.bookings||[];</span></p>
+<p class="p1"><span class="s1">    cache=allWeekBookings.filter(b=&gt;normalizeDate(b.date)===selectedDate);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">    // ✅ อัปเดตตารางว่างด้วยทันที</span></p>
+<p class="p1"><span class="s1">    if(statusViewDate) renderStatusForDate(statusViewDate);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">    const mine=allWeekBookings.filter(b=&gt;(b.emails||[]).map(e=&gt;e.toLowerCase()).includes(email));</span></p>
+<p class="p1"><span class="s1">    if(!mine.length){</span></p>
+<p class="p1"><span class="s1">      document.getElementById('myBookingList').innerHTML='&lt;div class="empty-state"&gt;ไม่พบการจองสำหรับอีเมลนี้&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">      return;</span></p>
+<p class="p1"><span class="s1">    }</span></p>
+<p class="p1"><span class="s1">    document.getElementById('myBookingList').innerHTML=mine.map(b=&gt;{</span></p>
+<p class="p1"><span class="s1">      const done=isDone(b),n=(b.confirmedBy||[]).length;</span></p>
+<p class="p1"><span class="s1">      const badge=done?'&lt;span class="status-badge badge-confirmed"&gt;✅ ยืนยันครบ&lt;/span&gt;':'&lt;span class="status-badge badge-pending"&gt;⏳ รอยืนยัน '+n+'/3&lt;/span&gt;';</span></p>
+<p class="p1"><span class="s1">      const statusBox=done</span></p>
+<p class="p1"><span class="s1">        ?'&lt;div style="padding:8px 12px;background:var(--green-light);border-radius:8px;font-size:12px;color:var(--green);font-weight:600;margin-bottom:12px;"&gt;✅ ยืนยันครบแล้ว การจองมีผลสมบูรณ์&lt;/div&gt;'</span></p>
+<p class="p1"><span class="s1">        :'&lt;div style="padding:8px 12px;background:var(--orange-light);border-radius:8px;font-size:12px;color:var(--orange);font-weight:600;margin-bottom:12px;"&gt;⏳ รอยืนยัน '+n+'/3 คน&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">      const rows=(b.emails||[]).map((em,i)=&gt;{</span></p>
+<p class="p1"><span class="s1">        const confirmed=(b.confirmedBy||[]).includes(i.toString())||(b.confirmedBy||[]).includes(i);</span></p>
+<p class="p1"><span class="s1">        return '&lt;div class="email-confirm-row '+(confirmed?'row-confirmed':'row-waiting')+</span></p>
+<p class="p1"><span class="s1">          '"&gt;&lt;div class="ecr-dot '+(confirmed?'green':'orange')+</span></p>
+<p class="p1"><span class="s1">          '"&gt;&lt;/div&gt;&lt;div class="ecr-info"&gt;&lt;div class="ecr-email"&gt;'+em+</span></p>
+<p class="p1"><span class="s1">          '&lt;/div&gt;&lt;div class="ecr-role"&gt;'+ROLES[i]+</span></p>
+<p class="p1"><span class="s1">          '&lt;/div&gt;&lt;/div&gt;&lt;div class="ecr-status '+(confirmed?'s-confirmed':'s-waiting')+</span></p>
+<p class="p1"><span class="s1">          '"&gt;'+(confirmed?'✅ ยืนยันแล้ว':'📧 รอกดยืนยัน')+'&lt;/div&gt;&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">      }).join('');</span></p>
+<p class="p1"><span class="s1">      const canCancel=(b.emails||[]).map(e=&gt;e.toLowerCase()).includes(email);</span></p>
+<p class="p1"><span class="s1">      const cancelBtn=canCancel</span></p>
+<p class="p1"><span class="s1">        ?'&lt;button class="cancel-btn" onclick="cancelBooking(\''+b.id+'\')"&gt;ยกเลิกการจอง&lt;/button&gt;':'';</span></p>
+<p class="p1"><span class="s1">      // ✅ แสดง date ที่อ่านง่าย</span></p>
+<p class="p1"><span class="s1">      const displayDate=normalizeDate(b.date);</span></p>
+<p class="p1"><span class="s1">      return '&lt;div class="booking-card '+(done?'confirmed':'pending')+</span></p>
+<p class="p1"><span class="s1">        '"&gt;&lt;div class="booking-card-header"&gt;&lt;div&gt;&lt;div class="booking-card-title"&gt;📍 '+b.room+</span></p>
+<p class="p1"><span class="s1">        '&lt;/div&gt;&lt;div class="booking-card-detail"&gt;📅 '+displayDate+' · ⏰ '+b.slot+' ('+b.durLabel+</span></p>
+<p class="p1"><span class="s1">        ')&lt;/div&gt;&lt;/div&gt;'+badge+'&lt;/div&gt;'+statusBox+</span></p>
+<p class="p1"><span class="s1">        '&lt;div class="email-confirm-list"&gt;'+rows+'&lt;/div&gt;'+</span></p>
+<p class="p1"><span class="s1">        '&lt;div class="card-actions"&gt;'+cancelBtn+'&lt;/div&gt;&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">    }).join('');</span></p>
+<p class="p1"><span class="s1">  }catch(e){</span></p>
+<p class="p1"><span class="s1">    document.getElementById('myBookingList').innerHTML='&lt;div class="empty-state"&gt;❌ โหลดไม่สำเร็จ&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">// ✅ แปลง date ให้เป็น d/m/yyyy ไม่ว่าจะมาในรูปแบบไหน</span></p>
+<p class="p1"><span class="s1">function normalizeDate(dateStr){</span></p>
+<p class="p1"><span class="s1">  if(!dateStr)return'';</span></p>
+<p class="p1"><span class="s1">  // ถ้าเป็น ISO format เช่น 2026-04-17T00:00:00.000Z</span></p>
+<p class="p1"><span class="s1">  if(dateStr.includes('T')||dateStr.includes('-')){</span></p>
+<p class="p1"><span class="s1">    const d=new Date(dateStr);</span></p>
+<p class="p1"><span class="s1">    return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">  // ถ้าเป็น d/m/yyyy อยู่แล้ว</span></p>
+<p class="p1"><span class="s1">  return dateStr;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">function getWeekDates(){</span></p>
+<p class="p1"><span class="s1">  const today=new Date();</span></p>
+<p class="p1"><span class="s1">  const day=today.getDay(); // 0=อา, 1=จ ...</span></p>
+<p class="p1"><span class="s1">  const mon=new Date(today);</span></p>
+<p class="p1"><span class="s1">  mon.setDate(today.getDate()-(day===0?6:day-1)); // เริ่มจากจันทร์</span></p>
+<p class="p1"><span class="s1">  const days=['จ','อ','พ','พฤ','ศ','ส','อา'];</span></p>
+<p class="p1"><span class="s1">  const result=[];</span></p>
+<p class="p1"><span class="s1">  for(let i=0;i&lt;7;i++){</span></p>
+<p class="p1"><span class="s1">    const d=new Date(mon);d.setDate(mon.getDate()+i);</span></p>
+<p class="p1"><span class="s1">    const ds=d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();</span></p>
+<p class="p1"><span class="s1">    result.push({dateStr:ds,dayName:days[i],dayNum:d.getDate(),isToday:ds===todayStr()});</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">  return result;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">let statusViewDate=''; // วันที่กำลังดูอยู่ใน status tab</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function buildWeekDayTabs(weekDates){</span></p>
+<p class="p1"><span class="s1">  const container=document.getElementById('weekDayTabs');</span></p>
+<p class="p1"><span class="s1">  container.innerHTML='';</span></p>
+<p class="p1"><span class="s1">  weekDates.forEach(d=&gt;{</span></p>
+<p class="p1"><span class="s1">    const btn=document.createElement('div');</span></p>
+<p class="p1"><span class="s1">    btn.style.cssText='min-width:52px;padding:8px 6px;border-radius:8px;border:2px solid var(--border);background:white;cursor:pointer;text-align:center;flex-shrink:0;font-family:Kanit,sans-serif;transition:all 0.2s;';</span></p>
+<p class="p1"><span class="s1">    btn.innerHTML='&lt;div style="font-size:10px;color:inherit;"&gt;'+(d.isToday?'&lt;b&gt;วันนี้&lt;/b&gt;':d.dayName)+'&lt;/div&gt;&lt;div style="font-size:17px;font-weight:700;"&gt;'+d.dayNum+'&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">    if(d.isToday){btn.style.background='var(--red)';btn.style.borderColor='var(--red)';btn.style.color='white';}</span></p>
+<p class="p1"><span class="s1">    btn.onclick=()=&gt;{</span></p>
+<p class="p1"><span class="s1">      container.querySelectorAll('div').forEach(b=&gt;{b.style.background='white';b.style.borderColor='var(--border)';b.style.color='var(--text)';});</span></p>
+<p class="p1"><span class="s1">      btn.style.background='var(--red)';btn.style.borderColor='var(--red)';btn.style.color='white';</span></p>
+<p class="p1"><span class="s1">      statusViewDate=d.dateStr;</span></p>
+<p class="p1"><span class="s1">      renderStatusForDate(d.dateStr);</span></p>
+<p class="p1"><span class="s1">    };</span></p>
+<p class="p1"><span class="s1">    if(d.isToday)statusViewDate=d.dateStr;</span></p>
+<p class="p1"><span class="s1">    container.appendChild(btn);</span></p>
+<p class="p1"><span class="s1">  });</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">let allWeekBookings=[];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">async function loadStatus(){</span></p>
+<p class="p1"><span class="s1">  document.getElementById('statusTable').innerHTML='&lt;div class="loading-state"&gt;⏳ กำลังโหลด...&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">  const weekDates=getWeekDates();</span></p>
+<p class="p1"><span class="s1">  buildWeekDayTabs(weekDates);</span></p>
+<p class="p1"><span class="s1">  try{</span></p>
+<p class="p1"><span class="s1">    // ✅ ดึงทั้งหมด ไม่ filter date เพื่อให้ครบทุกวัน</span></p>
+<p class="p1"><span class="s1">    const res=await apiGet({action:'getBookings'});</span></p>
+<p class="p1"><span class="s1">    allWeekBookings=res.bookings||[];</span></p>
+<p class="p1"><span class="s1">    cache=allWeekBookings.filter(b=&gt;normalizeDate(b.date)===selectedDate);</span></p>
+<p class="p1"><span class="s1">    renderStatusForDate(statusViewDate||todayStr());</span></p>
+<p class="p1"><span class="s1">    onTimeChange();</span></p>
+<p class="p1"><span class="s1">  }catch(e){</span></p>
+<p class="p1"><span class="s1">    document.getElementById('statusTable').innerHTML='&lt;div class="empty-state"&gt;❌ โหลดไม่สำเร็จ&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">  }</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">function renderStatusForDate(dateStr){</span></p>
+<p class="p1"><span class="s1">  const rooms=['ห้องประชุม 1','ห้องประชุม 2','ห้องประชุม 3','ห้องประชุม 4','ห้องประชุม 5','ห้องประชุม 6'];</span></p>
+<p class="p1"><span class="s1">  const dayBookings=allWeekBookings.filter(b=&gt;normalizeDate(b.date)===dateStr);</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  // สร้าง slots ทีละ 30 นาที</span></p>
+<p class="p1"><span class="s1">  const slots=[];</span></p>
+<p class="p1"><span class="s1">  const hours=[8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,0,1];</span></p>
+<p class="p1"><span class="s1">  hours.forEach(h=&gt;{</span></p>
+<p class="p1"><span class="s1">    [0,30].forEach(m=&gt;{</span></p>
+<p class="p1"><span class="s1">      const s=toMins(h,m);</span></p>
+<p class="p1"><span class="s1">      const e=s+30;</span></p>
+<p class="p1"><span class="s1">      const sh=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');</span></p>
+<p class="p1"><span class="s1">      const eh=String(Math.floor(e/60)%24).padStart(2,'0')+':'+String(e%60).padStart(2,'0');</span></p>
+<p class="p1"><span class="s1">      slots.push({l:sh+'–'+eh,s,e});</span></p>
+<p class="p1"><span class="s1">    });</span></p>
+<p class="p1"><span class="s1">  });</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  let html='&lt;div style="font-size:13px;color:var(--gray);margin-bottom:12px;font-weight:600;"&gt;📅 '+dateStr+'&lt;/div&gt;';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  // ✅ ใช้ CSS grid ให้ทุกห้อง align ตรงกัน</span></p>
+<p class="p1"><span class="s1">  const gridStyle='display:grid;grid-template-columns:repeat(4,1fr);gap:3px;';</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">  rooms.forEach(room=&gt;{</span></p>
+<p class="p1"><span class="s1">    const rb=dayBookings.filter(b=&gt;b.room===room);</span></p>
+<p class="p1"><span class="s1">    html+='&lt;div style="margin-bottom:14px;background:white;border-radius:10px;padding:12px;border:1.5px solid var(--border);"&gt;';</span></p>
+<p class="p1"><span class="s1">    html+='&lt;div style="font-weight:700;font-size:13px;margin-bottom:8px;color:#333;"&gt;'+room+'&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">    html+='&lt;div style="'+gridStyle+'"&gt;';</span></p>
+<p class="p1"><span class="s1">    slots.forEach(sl=&gt;{</span></p>
+<p class="p1"><span class="s1">      const hit=rb.find(b=&gt;b.startMins&lt;=sl.s&amp;&amp;b.endMins&gt;=sl.e);</span></p>
+<p class="p1"><span class="s1">      const partial=!hit&amp;&amp;rb.find(b=&gt;b.startMins&lt;sl.e&amp;&amp;b.endMins&gt;sl.s);</span></p>
+<p class="p1"><span class="s1">      let bg,color,icon,title='';</span></p>
+<p class="p1"><span class="s1">      if(hit){</span></p>
+<p class="p1"><span class="s1">        const d=isDone(hit);</span></p>
+<p class="p1"><span class="s1">        bg=d?'#ffeaea':'#fffbf0';color=d?'#c0392b':'#e67e22';icon=d?'🔴':'🟡';</span></p>
+<p class="p1"><span class="s1">        title=hit.slot+' ('+hit.durLabel+')';</span></p>
+<p class="p1"><span class="s1">      } else if(partial){</span></p>
+<p class="p1"><span class="s1">        bg='#fffbf0';color='#e67e22';icon='🟡';title='ทับซ้อน';</span></p>
+<p class="p1"><span class="s1">      } else {</span></p>
+<p class="p1"><span class="s1">        bg='#e8f8f0';color='#27ae60';icon='🟢';</span></p>
+<p class="p1"><span class="s1">      }</span></p>
+<p class="p1"><span class="s1">      html+='&lt;div title="'+title+'" style="padding:4px 2px;border-radius:5px;font-size:9px;font-weight:600;background:'+bg+';color:'+color+';text-align:center;white-space:nowrap;overflow:hidden;"&gt;'+icon+' '+sl.l+'&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">    });</span></p>
+<p class="p1"><span class="s1">    html+='&lt;/div&gt;&lt;/div&gt;';</span></p>
+<p class="p1"><span class="s1">  });</span></p>
+<p class="p1"><span class="s1">  document.getElementById('statusTable').innerHTML=html;</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p1"><span class="s1">function showTab(tab){</span></p>
+<p class="p1"><span class="s1">  ['book','mybooking','status'].forEach(t=&gt;document.getElementById('tab-'+t).style.display=t===tab?'block':'none');</span></p>
+<p class="p1"><span class="s1">  document.querySelectorAll('.tab').forEach((el,i)=&gt;el.classList.toggle('active',['book','mybooking','status'][i]===tab));</span></p>
+<p class="p1"><span class="s1">  if(tab==='status')loadStatus();</span></p>
+<p class="p1"><span class="s1">}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">generateDates();populateHours();handleUrlToken();loadStatus();</span></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
